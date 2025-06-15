@@ -104,6 +104,13 @@ Update development guidelines when you learn:
 
 ## 9. Committing Changes
 
+### Pre-Commit Cleanup
+Before committing changes, ensure:
+- Remove any temporary test directories created during development
+- Clean up any temporary files or artifacts
+- Verify only intended files are being committed using `git status`
+- Use `git add` selectively to avoid committing unwanted files
+
 ### Git Commit Message Format
 1. **Subject Line** (≤ 50 characters)
    - Capitalize first word
