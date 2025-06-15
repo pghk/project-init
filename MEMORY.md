@@ -16,42 +16,18 @@ This is a bash project initializer that creates new development projects with bo
 - Complete command-line interface with argument parsing and error handling
 - Initial git commit functionality that creates commits with all boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
-- Comprehensive test suite using bats framework with 36 flexible test cases:
-  - Validates filesystem-safe folder names suitable for directory creation
-  - Tests chronologically sortable name generation capability
-  - Validates memorable words suitable for folder naming
-  - Tests folder name variation capability over multiple calls
-  - Tests successful directory creation with generated names
-  - Tests graceful handling of existing directories
-  - Tests directory creation with auto-generated names
-  - Tests proper return values and output from directory creation
-  - Tests boilerplate file generation in existing directories
-  - Tests error handling for non-existent directories
-  - Tests content validation of generated boilerplate files
-  - Tests template file availability and readability
-  - Tests consistent project structure creation
-  - Tests appropriate AGENT.md file generation (now handled uniformly with other templates)
-  - Tests integrated project creation with boilerplate files
-  - Tests project creation with specified directory names
-  - Tests git repository initialization in existing directories
-  - Tests error handling for git initialization in non-existent directories
-  - Tests graceful handling of existing git repositories
-  - Tests complete project creation with git repository initialization
-  - Tests project creation with git using specified directory names
-  - Tests main script execution with no arguments (automatic name generation)
-  - Tests main script execution with specified directory names
-  - Tests help information display for various help flags
-  - Tests invalid argument handling with appropriate error messages
-  - Tests meaningful error messages for directory creation failures
-  - Tests informative success messages for project creation
-  - Tests core functionality demonstration when run without arguments
-  - Tests script executable permissions and proper shebang line
-  - Tests direct script execution without bash invocation
-  - Tests git repository initialization with initial commit
-  - Tests appropriate commit messages for initial commits
-  - Tests that all boilerplate files are included in initial commit
-  - Tests graceful handling of existing git repositories with new commits
-  - Tests main script creates projects with initial commits
+- Comprehensive test suite using bats framework with 11 focused, maintainable test cases:
+  - Tests folder names are brief, memorable, and filesystem-safe
+  - Tests folder names are chronologically sortable within 10-year span
+  - Tests folder names provide uniqueness through variation
+  - Tests support for both auto-generated and custom directory names
+  - Tests creation of all required boilerplate files with appropriate content
+  - Tests integrated project creation with boilerplate works end-to-end
+  - Tests git repository initialization with proper initial commit
+  - Tests complete project creation with git integration works end-to-end
+  - Tests main script supports all design requirements through command-line interface
+  - Tests main script handles custom directory names and error cases
+  - Tests template system provides consistent boilerplate structure
 
 ## Project Structure
 - `script.sh`: Main bash script with project initialization functionality
@@ -69,8 +45,8 @@ This is a bash project initializer that creates new development projects with bo
 ## Technical Details
 - Uses bash RANDOM variable for random index generation
 - Script can be sourced for function access or run directly as command-line tool
-- All tests passing with bats framework (36 tests total)
-- Tests refactored for flexibility - focus on design requirements rather than implementation details
+- All tests passing with bats framework (11 tests total)
+- Tests refactored for maximum flexibility and maintainability - consolidated from 36 to 11 focused test cases that validate design requirements rather than implementation details
 - Complete command-line interface with help system and error handling
 - Main script logic handles 0-1 arguments with comprehensive validation
 - Script has proper executable permissions and shebang line for command-line use
@@ -119,8 +95,9 @@ All design requirements have been successfully implemented. The project initiali
 - ✅ Initializes git repository with initial commit containing all boilerplate files
 - ✅ Full command-line interface with help system and error handling
 - ✅ Executable as standalone tool with proper permissions and shebang
-- ✅ Comprehensive test suite with 36 test cases covering all functionality
+- ✅ Comprehensive test suite with 11 focused, maintainable test cases covering all functionality
 - ✅ Language-agnostic AGENT.md template for development guidelines
+- ✅ Test suite refactored for maximum maintainability and focus on design requirements
 
 ### Design Requirements Fulfilled
 All design requirements from README.md have been completely implemented:

@@ -10,6 +10,7 @@
 - [x] Move boilerplate templates to separate markdown files in their own directory
 - [x] Update AGENT.md template to be language-agnostic and always use template file
 - [x] Refactor tests for flexibility to focus on design requirements rather than implementation details
+- [x] Consolidate and refactor tests to be more maintainable and focused on design requirements
 - [x] Update script to use method 2 for year digit extraction (parameter expansion with %Y)
 - [x] Implement git repository initialization
 - [x] Refactor the function `generate_boilerplate_files` - it shouldn't need to treat AGENT.md differently than the others
