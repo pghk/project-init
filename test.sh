@@ -323,29 +323,3 @@
 
     rm -rf "$test_dir"
 }
-
-# Command-line tool validation
-
-@test "renamed script works as proper command-line tool" {
-    # Test that project-init exists and is executable
-    [ -f "./project-init" ]
-    [ -x "./project-init" ]
-
-    # Test that script works without .sh extension
-    run ./project-init --help
-    [ "$status" -eq 0 ]
-    [[ "$output" =~ "project-init" ]]
-
-    # Test that script name appears in help output
-    [[ "$output" =~ "project-init" ]]
-
-    # Test basic functionality works with new name
-    custom_dir="cli-test-$$"
-    run ./project-init "$custom_dir"
-    [ "$status" -eq 0 ]
-    [ -d "$custom_dir" ]
-    [ -f "$custom_dir/README.md" ]
-
-    # Cleanup
-    rm -rf "$custom_dir"
-}

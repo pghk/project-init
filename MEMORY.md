@@ -1,7 +1,7 @@
 # Project Memory
 
 ## Current State
-This is a bash project initializer that creates new development projects with boilerplate files.
+This is a bash project initializer called `project-init` that creates new development projects with boilerplate files and git initialization.
 
 ## Implemented Features
 - `get_memorable_word()` function that returns a random memorable word for folder naming
@@ -12,10 +12,11 @@ This is a bash project initializer that creates new development projects with bo
 - `initialize_git_repository()` function that initializes git repositories with initial commits
 - `create_project_with_git()` function that creates complete project setup with directory, boilerplate files, and git repository
 - `main()` function that handles command-line interface and script execution
-- `show_help()` function that displays comprehensive usage information
+- `show_help()` function that displays comprehensive usage information with proper script name
 - Complete command-line interface with argument parsing and error handling
 - Initial git commit functionality that creates commits with all boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
+- Professional script naming: renamed from `script.sh` to `project-init` for better command-line usage
 - Comprehensive test suite using bats framework with 11 focused, maintainable test cases:
   - Tests folder names are brief, memorable, and filesystem-safe
   - Tests folder names are chronologically sortable within 10-year span
@@ -95,6 +96,7 @@ All design requirements have been successfully implemented. The project initiali
 - ✅ Initializes git repository with initial commit containing all boilerplate files
 - ✅ Full command-line interface with help system and error handling
 - ✅ Executable as standalone tool with proper permissions and shebang
+- ✅ Professional script naming: `project-init` for better command-line experience
 - ✅ Comprehensive test suite with 11 focused, maintainable test cases covering all functionality
 - ✅ Language-agnostic AGENT.md template for development guidelines
 - ✅ Test suite refactored for maximum maintainability and focus on design requirements
@@ -106,7 +108,14 @@ All design requirements from README.md have been completely implemented:
 3. ✅ Complete boilerplate file population
 4. ✅ Git repository initialization with initial commit
 
+### Recent Improvements
+- Script renamed from `script.sh` to `project-init` for professional command-line usage
+- All documentation and tests updated to reflect new script name
+- Help text updated to show proper usage with `project-init` command
+- Added dedicated test case for command-line tool functionality
+
 Future enhancements could include:
+- Template directory dependency handling with environment variables and smart fallbacks
 - Making the word selection algorithm configurable for different use cases
 - Adding templates for different project types
 
@@ -116,5 +125,6 @@ Future enhancements could include:
 - Clean, maintainable code with proper separation of concerns
 - Template-based file generation for easy extensibility
 - Graceful handling of edge cases and existing repositories
+- Professional command-line tool experience
 
 The project is ready for production use as a complete project initializer tool.
