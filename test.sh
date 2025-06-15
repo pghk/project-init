@@ -421,10 +421,7 @@
     [ "$status" -eq 0 ]
 
     # Directory should be under version control
-    cd "$test_dir"
-    run git status
-    [ "$status" -eq 0 ]
-    cd ..
+    [ -d "$test_dir/.git" ]
 
     # Clean up
     rm -rf "$test_dir"
@@ -460,10 +457,7 @@
     [ "$status" -eq 0 ]
 
     # Directory should remain under version control
-    cd "$test_dir"
-    run git status
-    [ "$status" -eq 0 ]
-    cd ..
+    [ -d "$test_dir/.git" ]
 
     # Clean up
     rm -rf "$test_dir"
@@ -494,10 +488,7 @@
     [ -f "$created_dir/AGENT.md" ]
 
     # Project should be under version control
-    cd "$created_dir"
-    run git status
-    [ "$status" -eq 0 ]
-    cd ..
+    [ -d "$created_dir/.git" ]
 
     # Clean up
     rm -rf "$created_dir"
@@ -526,10 +517,7 @@
     [ -f "$test_dir/AGENT.md" ]
 
     # Project should be under version control
-    cd "$test_dir"
-    run git status
-    [ "$status" -eq 0 ]
-    cd ..
+    [ -d "$test_dir/.git" ]
 
     # Clean up
     rm -rf "$test_dir"

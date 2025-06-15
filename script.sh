@@ -163,8 +163,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
         echo "Created project directory with boilerplate and git: $created_dir"
         echo "Files created:"
         ls -la "$created_dir"
-        echo "Git repository initialized:"
-        (cd "$created_dir" && git status)
+        echo "Git repository initialized successfully"
     else
         echo "Failed to create project directory with boilerplate and git"
     fi
