@@ -141,10 +141,12 @@ The project is complete and ready for production use as a fully-featured project
 
 ### Documentation Updates
 - ✅ Added comprehensive installation instructions to README.md including:
-  - Quick install method with repository cloning (curl-only method removed due to template dependency)
-  - Manual installation from repository with proper template setup
-  - Template configuration options and system-wide installation
+  - Consolidated single installation method (removed separate quick/manual methods)
+  - Symlinked templates approach for easy repository updates
+  - Both system-wide and user installation options
+  - Template configuration options with symlink strategy
   - Environment variable setup for custom templates
   - Updated usage examples to reflect proper command-line usage
   - Corrected GitHub repository URL to use `pghk` username
   - Emphasized template requirement for tool functionality
+  - Added dedicated update section for pulling latest changes

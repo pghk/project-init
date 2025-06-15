@@ -27,3 +27,4 @@
 - [x] Handle templates directory dependency with environment variable and smart fallbacks (current dir, ~/.config/project-init/templates/, /usr/local/share/project-init/templates/)
 - [x] Add installation instructions to README.md
 - [x] Update installation instructions with correct GitHub repo and template requirements
+- [x] Consolidate installation methods and use symlinks for templates to enable easy updates

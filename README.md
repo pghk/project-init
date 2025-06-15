@@ -4,52 +4,49 @@ This is a simple bash script called `project-init` for starting new development 
 
 ## Installation
 
-### Quick Install (Recommended)
-
-Clone the repository and install:
-
-```bash
-# Clone the repository with templates
-git clone https://github.com/pghk/project-init.git
-cd project-init/init
-
-# Make the script executable
-chmod +x project-init
-
-# Install script and templates system-wide
-sudo mkdir -p /usr/local/share/project-init/templates/
-sudo cp -r templates/* /usr/local/share/project-init/templates/
-sudo cp project-init /usr/local/bin/
-
-# Verify installation
-project-init --help
-```
-
-### Manual Installation
-
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/pghk/project-init.git
    cd project-init/init
    ```
 
-2. Make the script executable:
+2. **Make the script executable:**
    ```bash
    chmod +x project-init
    ```
 
-3. Install templates and add to your PATH:
+3. **Install the script:**
    ```bash
-   # Copy templates to user config directory
-   mkdir -p ~/.config/project-init/templates/
-   cp -r templates/* ~/.config/project-init/templates/
+   # Option A: System-wide installation (recommended)
+   sudo ln -s "$(pwd)/project-init" /usr/local/bin/project-init
    
-   # Add to ~/.bashrc or ~/.zshrc
-   export PATH="$PATH:/path/to/project-init/init"
-   
-   # Or create a symlink
-   sudo ln -s /path/to/project-init/init/project-init /usr/local/bin/project-init
+   # Option B: User installation
+   mkdir -p ~/.local/bin
+   ln -s "$(pwd)/project-init" ~/.local/bin/project-init
+   # Add ~/.local/bin to your PATH if not already done
    ```
+
+4. **Set up templates with symlinks (recommended for easy updates):**
+   ```bash
+   # Create config directory and symlink templates
+   mkdir -p ~/.config/project-init/
+   ln -s "$(pwd)/templates" ~/.config/project-init/templates
+   ```
+
+5. **Verify installation:**
+   ```bash
+   project-init --help
+   ```
+
+### Updating
+
+To get the latest templates and features:
+```bash
+cd /path/to/project-init
+git pull
+```
+
+Since templates are symlinked, updates are automatically available without reinstallation.
 
 ### Template Configuration
 
