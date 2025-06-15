@@ -53,6 +53,9 @@ If necessary, update the development guidelines to reflect anything you've learn
 - Support both sourcing and direct execution patterns
 - Use meaningful variable names and local scope where appropriate
 - Add shebang lines for proper script execution
+- Consider hardcoded data arrays over runtime string manipulation for better performance
+- Prefer direct data access over transformation operations when possible
+- Create separate arrays for different data formats (e.g., uppercase vs lowercase) rather than converting at runtime
 
 ## Git Workflow
 - Initialize git repository at project start

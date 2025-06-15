@@ -1,25 +1,11 @@
 #!/bin/bash
 
-# NATO alphabet words array
-NATO_WORDS=(
-    "Alpha" "Bravo" "Charlie" "Delta" "Echo" "Foxtrot" "Golf" "Hotel"
-    "India" "Juliet" "Kilo" "Lima" "Mike" "November" "Oscar" "Papa"
-    "Quebec" "Romeo" "Sierra" "Tango" "Uniform" "Victor" "Whiskey" "X-ray" "Yankee" "Zulu"
-)
-
 # Lowercase NATO alphabet words array
 LOWERCASE_NATO_WORDS=(
     "alpha" "bravo" "charlie" "delta" "echo" "foxtrot" "golf" "hotel"
     "india" "juliet" "kilo" "lima" "mike" "november" "oscar" "papa"
     "quebec" "romeo" "sierra" "tango" "uniform" "victor" "whiskey" "x-ray" "yankee" "zulu"
 )
-
-# Function to get a random NATO alphabet word
-get_nato_word() {
-    local array_length=${#NATO_WORDS[@]}
-    local random_index=$((RANDOM % array_length))
-    echo "${NATO_WORDS[random_index]}"
-}
 
 # Function to get a random lowercase NATO alphabet word
 get_lowercase_nato_word() {
@@ -37,7 +23,6 @@ get_date_nato() {
 
 # If script is run directly (not sourced), demonstrate the functions
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo "Random NATO alphabet word: $(get_nato_word)"
     echo "Random lowercase NATO word: $(get_lowercase_nato_word)"
     echo "Date with NATO word: $(get_date_nato)"
 fi
