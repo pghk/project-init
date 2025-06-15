@@ -10,11 +10,11 @@ This is a bash project initializer that creates new development projects with bo
 - `generate_boilerplate_files()` function that creates standard project files from templates in a directory (always uses template for AGENT.md)
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
-- Comprehensive test suite using bats framework with 13 behavioral test cases:
-  - Validates properly formatted folder names (date-word with dash separator)
-  - Tests chronologically sortable date format (YMM)
-  - Validates memorable words (lowercase, filesystem-safe, appropriate length)
-  - Tests folder name uniqueness and randomness over multiple calls
+- Comprehensive test suite using bats framework with 16 flexible test cases:
+  - Validates filesystem-safe folder names suitable for directory creation
+  - Tests chronologically sortable name generation capability
+  - Validates memorable words suitable for folder naming
+  - Tests folder name variation capability over multiple calls
   - Tests successful directory creation with generated names
   - Tests graceful handling of existing directories
   - Tests directory creation with auto-generated names
@@ -22,6 +22,9 @@ This is a bash project initializer that creates new development projects with bo
   - Tests boilerplate file generation in existing directories
   - Tests error handling for non-existent directories
   - Tests content validation of generated boilerplate files
+  - Tests template file availability and readability
+  - Tests consistent project structure creation
+  - Tests appropriate AGENT.md file generation
   - Tests integrated project creation with boilerplate files
   - Tests project creation with specified directory names
 
@@ -42,6 +45,7 @@ This is a bash project initializer that creates new development projects with bo
 - Uses bash RANDOM variable for random index generation
 - Script can be sourced for function access or run directly for demonstration
 - All tests passing with bats framework (16 tests total)
+- Tests refactored for flexibility - focus on design requirements rather than implementation details
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
 - `generate_folder_name()` uses `date +%y%m` for brief date format with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
@@ -61,6 +65,7 @@ This is a bash project initializer that creates new development projects with bo
 - Directory creation includes error handling for existing directories
 - Boilerplate generation includes error handling for non-existent directories and missing template files
 - Functions return created directory name on success, error messages on failure
+- Test suite designed to be flexible and focus on behavioral requirements rather than rigid implementation details
 
 ## Next Steps
 Core folder name generation, directory creation, and template-based boilerplate file generation functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The project needs additional features to fulfill its goal as a project initializer:

@@ -11,7 +11,8 @@ For every task assigned, complete these steps in order:
 7. **Fix Issues** - Address any warnings or errors in the code
 8. **Update Guidelines** - Revise development guidelines based on learnings
 9. **Commit Changes** - Use descriptive commit message (see implementation guide)
-10. **Stop** - End session to open new chat for next task
+10. **Refactor Tests for Flexibility** - Review and refactor tests to focus on design requirements rather than implementation details
+11. **Stop** - End session to open new chat for next task
 
 ---
 
