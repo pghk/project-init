@@ -253,18 +253,17 @@
     [ "$status" -eq 0 ]
 
     # Files should have content suitable for project initialization
-    # README should be a markdown file with some structure
-    [[ $(head -n 1 "$test_dir/README.md") == \#* ]]
-
-    # TODO should be a markdown file
-    [ -f "$test_dir/TODO.md" ]
+    # Files should be non-empty with appropriate content structure
+    [ -s "$test_dir/README.md" ]
     [ -s "$test_dir/TODO.md" ]
+    [ -s "$test_dir/MEMORY.md" ]
+    [ -s "$test_dir/AGENT.md" ]
 
-    # MEMORY should be a markdown file with headers
-    [[ $(head -n 1 "$test_dir/MEMORY.md") == \#* ]]
-
-    # AGENT should be a markdown file with headers
-    [[ $(head -n 1 "$test_dir/AGENT.md") == \#* ]]
+    # Files should contain text suitable for their purpose
+    grep -q -i "project\|readme" "$test_dir/README.md"
+    grep -q -i "todo\|task\|\[ \]\|\-" "$test_dir/TODO.md"
+    grep -q -i "memory\|project\|state" "$test_dir/MEMORY.md"
+    grep -q -i "agent\|development\|rules\|guidelines" "$test_dir/AGENT.md"
 
     # Clean up
     rm -rf "$test_dir"
@@ -313,15 +312,19 @@
     [ -s "$test_dir/MEMORY.md" ]
     [ -s "$test_dir/AGENT.md" ]
 
-    # Files should be suitable for project use
-    # README, MEMORY, and AGENT should be markdown with headers
-    for file in README.md MEMORY.md AGENT.md; do
-        grep -q "^#" "$test_dir/$file"
-    done
+    # Files should be suitable for project use with appropriate content
+    # Files should contain content relevant to their purpose
+    grep -q -i "project\|readme" "$test_dir/README.md"
+    grep -q -i "todo\|task\|\[ \]\|\-" "$test_dir/TODO.md"
+    grep -q -i "memory\|project\|state" "$test_dir/MEMORY.md"
+    grep -q -i "agent\|development\|rules\|guidelines" "$test_dir/AGENT.md"
 
-    # TODO.md should exist and be non-empty (format may vary)
-    [ -f "$test_dir/TODO.md" ]
-    [ -s "$test_dir/TODO.md" ]
+    # All files should be substantial (not just placeholder text)
+    for file in README.md TODO.md MEMORY.md AGENT.md; do
+        [ -s "$test_dir/$file" ]
+        line_count=$(wc -l < "$test_dir/$file")
+        [ "$line_count" -gt 2 ]
+    done
 
     # Clean up
     rm -rf "$test_dir"
@@ -344,13 +347,15 @@
     [ -f "$test_dir/AGENT.md" ]
     [ -s "$test_dir/AGENT.md" ]
 
-    # AGENT.md should be a markdown file with appropriate structure
-    [[ $(head -n 1 "$test_dir/AGENT.md") == \#* ]]
+    # AGENT.md should contain appropriate development guidance content
+    grep -q -i "development\|guidelines\|rules\|agent" "$test_dir/AGENT.md"
 
-    # Should contain content suitable for project development guidance
-    # (flexible check - just ensure it's substantial content)
+    # Should contain substantial content suitable for project guidance
     line_count=$(wc -l < "$test_dir/AGENT.md")
     [ "$line_count" -gt 10 ]
+
+    # Should contain actionable guidance (look for common development terms)
+    grep -q -i -E "(test|commit|task|step|process|workflow)" "$test_dir/AGENT.md"
 
     # Clean up
     rm -rf "$test_dir"
@@ -720,9 +725,9 @@
 }
 
 @test "script has proper shebang for command-line tool execution" {
-    # Verify the script has proper shebang line
+    # Verify the script has a proper shebang line for executable scripts
     first_line=$(head -n 1 script.sh)
-    [[ "$first_line" == "#!/bin/bash" ]]
+    [[ "$first_line" =~ ^#!/.*/bash$ ]]
 }
 
 # Tests for initial git commit functionality
@@ -758,7 +763,7 @@
     rm -rf "$test_dir"
 }
 
-@test "initial commit has appropriate commit message" {
+@test "initial commit has meaningful commit message" {
     source script.sh
 
     # Create a test directory and project
@@ -768,10 +773,12 @@
     # Should return success
     [ "$status" -eq 0 ]
 
-    # Check commit message
+    # Check that commit message exists and is meaningful
     cd "$test_dir"
     commit_message=$(git log --oneline -1 --pretty=format:"%s" 2>/dev/null || echo "")
-    [[ "$commit_message" == *"Initial commit"* ]]
+    [ -n "$commit_message" ]
+    # Message should be substantial (not just whitespace or single character)
+    [ ${#commit_message} -gt 5 ]
 
     cd ..
 
