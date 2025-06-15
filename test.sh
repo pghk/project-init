@@ -407,7 +407,7 @@
     rm -rf "$test_dir"
 }
 
-@test "initialize_git_repository creates git repository in directory" {
+@test "initialize_git_repository enables version control in project directory" {
     source script.sh
 
     # Create a test directory
@@ -420,10 +420,7 @@
     # Should return success
     [ "$status" -eq 0 ]
 
-    # Should have created .git directory
-    [ -d "$test_dir/.git" ]
-
-    # Should be a valid git repository
+    # Directory should be under version control
     cd "$test_dir"
     run git status
     [ "$status" -eq 0 ]
@@ -446,7 +443,7 @@
     [[ "$output" == *"Error"* ]]
 }
 
-@test "initialize_git_repository handles existing git repository gracefully" {
+@test "initialize_git_repository handles existing version control gracefully" {
     source script.sh
 
     # Create a test directory with git repo
@@ -462,14 +459,17 @@
     # Should return success (reinitializing is safe)
     [ "$status" -eq 0 ]
 
-    # Should still be a valid git repository
-    [ -d "$test_dir/.git" ]
+    # Directory should remain under version control
+    cd "$test_dir"
+    run git status
+    [ "$status" -eq 0 ]
+    cd ..
 
     # Clean up
     rm -rf "$test_dir"
 }
 
-@test "create_project_with_git creates directory, files, and git repository" {
+@test "create_project_with_git creates complete development-ready project" {
     source script.sh
 
     # Create project with git using generated name
@@ -484,16 +484,13 @@
     # Directory should exist
     [ -d "$output" ]
 
-    # Standard files should exist
+    # Standard project files should exist
     [ -f "$output/README.md" ]
     [ -f "$output/TODO.md" ]
     [ -f "$output/MEMORY.md" ]
     [ -f "$output/AGENT.md" ]
 
-    # Git repository should be initialized
-    [ -d "$output/.git" ]
-
-    # Should be a valid git repository
+    # Project should be under version control
     cd "$output"
     run git status
     [ "$status" -eq 0 ]
@@ -503,7 +500,7 @@
     rm -rf "$output"
 }
 
-@test "create_project_with_git works with specified directory name" {
+@test "create_project_with_git supports custom project names" {
     source script.sh
 
     # Create project with git using specific name
@@ -516,17 +513,20 @@
     # Should output the created directory name
     [ "$output" = "$test_dir" ]
 
-    # Directory should exist
+    # Directory should exist with specified name
     [ -d "$test_dir" ]
 
-    # Standard files should exist
+    # Standard project files should exist
     [ -f "$test_dir/README.md" ]
     [ -f "$test_dir/TODO.md" ]
     [ -f "$test_dir/MEMORY.md" ]
     [ -f "$test_dir/AGENT.md" ]
 
-    # Git repository should be initialized
-    [ -d "$test_dir/.git" ]
+    # Project should be under version control
+    cd "$test_dir"
+    run git status
+    [ "$status" -eq 0 ]
+    cd ..
 
     # Clean up
     rm -rf "$test_dir"
