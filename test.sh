@@ -35,12 +35,12 @@
     # Extract date part (before the dash)
     date_part=$(echo "$result" | cut -d'-' -f1)
 
-    # Date part should be non-empty and numeric (YYYYMMDD format)
+    # Date part should be non-empty and numeric (YMM format)
     [ -n "$date_part" ]
-    [[ "$date_part" =~ ^[0-9]{8}$ ]]
+    [[ "$date_part" =~ ^[0-9]{3}$ ]]
 
     # Should be current date (basic validation)
-    current_date=$(date +%Y%m%d)
+    current_date=$(date +%y%m)
     [ "$date_part" = "$current_date" ]
 }
 
