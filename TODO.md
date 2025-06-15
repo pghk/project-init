@@ -14,7 +14,7 @@
 - [ ] Implement git repository initialization
 - [ ] Create main script logic to tie everything together
 - [ ] Add command-line argument handling for user-specified directory names
-- [ ] Implement synchronization mechanism between project AGENT.md and templates/AGENT.md
+
 - [ ] Add proper error handling and user feedback for main script execution
 - [ ] Make script executable as a proper command-line project initializer tool
 - [ ] Add usage instructions and help text for the command-line interface

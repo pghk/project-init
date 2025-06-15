@@ -111,6 +111,12 @@ Update development guidelines when you learn:
 - Useful techniques or tools
 - Important considerations for future work
 
+### AGENT.md Synchronization
+When updating this project's AGENT.md file, consider whether changes should be reflected in the template:
+- **Core workflow changes** (steps 1-12, commit message format, project structure standards) should be synchronized to `templates/AGENT.md` while keeping it language-agnostic
+- **Project-specific implementation details** (bash scripting standards, bats testing framework, performance considerations) should remain only in the project AGENT.md
+- Review `templates/AGENT.md` after significant updates to ensure the template remains current with core workflow improvements while preserving its generic, language-agnostic nature
+
 ## 9. Reviewing TODO List
 
 ### Design Requirements Review
