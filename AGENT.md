@@ -39,8 +39,13 @@ If necessary, update the development guidelines to reflect anything you've learn
   - Non-empty return values
   - Multiple function calls
   - Edge cases and boundary conditions
+  - Format validation (separators, case sensitivity, etc.)
 - Always run tests with `bats test.sh` before committing
 - Source scripts in tests to access functions: `source script.sh`
+- Use portable string manipulation methods for cross-platform compatibility:
+  - Prefer `awk` over bash parameter expansion for case conversion
+  - Use `tr` for reliable case transformation
+  - Test string manipulation logic before implementing in tests
 
 ## Bash Scripting Best Practices
 - Use arrays for related data (e.g., NATO_WORDS array)

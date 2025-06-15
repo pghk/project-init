@@ -1,2 +1,3 @@
 - [x] Write the first test for a function that will output a random word from the NATO alphabet
 - [x] Concatenate a brief date string with a lowercase NATO word
+- [x] Refactor to simplify the code

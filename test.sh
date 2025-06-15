@@ -122,3 +122,33 @@
     [ "$date1" = "$date2" ]
     [ "$date2" = "$date3" ]
 }
+
+@test "get_lowercase_nato_word returns a valid lowercase NATO word" {
+    source script.sh
+    result=$(get_lowercase_nato_word)
+
+    # Define valid lowercase NATO alphabet words
+    lowercase_nato_words=(
+        "alpha" "bravo" "charlie" "delta" "echo" "foxtrot" "golf" "hotel"
+        "india" "juliet" "kilo" "lima" "mike" "november" "oscar" "papa"
+        "quebec" "romeo" "sierra" "tango" "uniform" "victor" "whiskey" "x-ray" "yankee" "zulu"
+    )
+
+    # Check if the result is one of the valid lowercase NATO words
+    found=false
+    for word in "${lowercase_nato_words[@]}"; do
+        if [[ "$result" == "$word" ]]; then
+            found=true
+            break
+        fi
+    done
+
+    # Assert that we found a valid word
+    [ "$found" = true ]
+}
+
+@test "get_lowercase_nato_word returns non-empty string" {
+    source script.sh
+    result=$(get_lowercase_nato_word)
+    [ -n "$result" ]
+}
