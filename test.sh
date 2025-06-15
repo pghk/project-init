@@ -316,6 +316,38 @@
     rm -rf "$test_dir"
 }
 
+@test "generate_boilerplate_files always uses AGENT.md template" {
+    source script.sh
+
+    # Create a test directory
+    test_dir="test-agent-template-$$"
+    mkdir "$test_dir"
+
+    # Generate boilerplate files
+    run generate_boilerplate_files "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # AGENT.md should exist
+    [ -f "$test_dir/AGENT.md" ]
+
+    # AGENT.md should match template content, not current project AGENT.md
+    if [ -f "templates/AGENT.md" ]; then
+        template_first_line=$(head -n 1 "templates/AGENT.md")
+        generated_first_line=$(head -n 1 "$test_dir/AGENT.md")
+        [ "$template_first_line" = "$generated_first_line" ]
+
+        # Verify it's using the template by checking for generalized content
+        # The template should not contain bash-specific content
+        ! grep -q "bats framework" "$test_dir/AGENT.md"
+        ! grep -q "source script.sh" "$test_dir/AGENT.md"
+    fi
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
 @test "create_project_with_boilerplate creates directory and files together" {
     source script.sh
 

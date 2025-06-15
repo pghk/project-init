@@ -7,7 +7,7 @@ This is a bash project initializer that creates new development projects with bo
 - `get_memorable_word()` function that returns a random memorable word for folder naming
 - `generate_folder_name()` function that creates unique folder names with brief date (YMM) and memorable word
 - `create_project_directory()` function that creates project directories with generated or specified names
-- `generate_boilerplate_files()` function that creates standard project files from templates in a directory
+- `generate_boilerplate_files()` function that creates standard project files from templates in a directory (always uses template for AGENT.md)
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
 - Comprehensive test suite using bats framework with 13 behavioral test cases:
@@ -41,17 +41,18 @@ This is a bash project initializer that creates new development projects with bo
 ## Technical Details
 - Uses bash RANDOM variable for random index generation
 - Script can be sourced for function access or run directly for demonstration
-- All tests passing with bats framework (15 tests total)
+- All tests passing with bats framework (16 tests total)
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
 - `generate_folder_name()` uses `date +%y%m` for brief date format with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
-- `generate_boilerplate_files()` copies template files to create README.md, TODO.md, MEMORY.md, and AGENT.md files
+- `generate_boilerplate_files()` copies template files to create README.md, TODO.md, MEMORY.md, and AGENT.md files (always uses AGENT.md template)
 - `create_project_with_boilerplate()` combines directory creation with file generation
 - Folder name format: YMM-memorableword (e.g., "2406-lima")
 - Script is executable with proper shebang line
 - Boilerplate files include appropriate content templates for new projects
-- AGENT.md is copied from current project if available, otherwise uses template file
+- AGENT.md is always created from the generalized template file for language-agnostic development guidelines
 - Template files are stored in `templates/` directory for better maintainability
+- AGENT.md template is generalized for any programming language/framework (not bash-specific)
 - Boilerplate generation uses file copying from templates instead of heredocs
 - Clean implementation focused on project initialization behavior
 - Function names and comments focus on what they do, not how they do it
@@ -67,3 +68,4 @@ Core folder name generation, directory creation, and template-based boilerplate 
 - Main script logic to tie everything together
 - Consider making the word selection algorithm configurable for different use cases
 - Consider adding templates for different project types (templates directory makes this easier to extend)
+- AGENT.md template provides comprehensive, language-agnostic development guidelines suitable for any project type

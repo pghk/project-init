@@ -8,5 +8,6 @@
 - [x] Implement project directory creation functionality
 - [x] Add boilerplate file generation (README.md, TODO.md, MEMORY.md, AGENT.md)
 - [x] Move boilerplate templates to separate markdown files in their own directory
+- [x] Update AGENT.md template to be language-agnostic and always use template file
 - [ ] Implement git repository initialization
 - [ ] Create main script logic to tie everything together

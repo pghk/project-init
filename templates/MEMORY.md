@@ -11,6 +11,7 @@ New project created with boilerplate files.
 - `README.md`: Project overview and documentation
 - `TODO.md`: Task tracking
 - `MEMORY.md`: This file - project state tracking
+- `AGENT.md`: Development rules and guidelines
 
 ## Technical Details
 Add technical implementation details here as the project develops.

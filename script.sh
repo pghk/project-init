@@ -74,13 +74,11 @@ generate_boilerplate_files() {
         fi
     done
 
-    # Create AGENT.md by copying from current project first, then fallback to template
-    if [ -f "AGENT.md" ]; then
-        cp "AGENT.md" "$target_directory/AGENT.md"
-    elif [ -f "templates/AGENT.md" ]; then
+    # Create AGENT.md by always using template
+    if [ -f "templates/AGENT.md" ]; then
         cp "templates/AGENT.md" "$target_directory/AGENT.md"
     else
-        echo "Error: No AGENT.md template found" >&2
+        echo "Error: AGENT.md template not found" >&2
         return 1
     fi
 
