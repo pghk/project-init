@@ -12,6 +12,7 @@ This is a simple bash script for starting new development projects.
   - MEMORY.md for maintaining project state between development sessions
   - AGENT.md with development rules and guidelines
 - Initializes a git repository in the folder with initial commit
+- Maintains synchronization between this project's AGENT.md and templates/AGENT.md - any updates to the project's AGENT.md should be reflected in the template while preserving its language-agnostic style
 
 ## Acknowledgements
 - Made with [Zed](https://zed.dev/) and [Claude Sonnet 4](https://www.anthropic.com/claude/sonnet)

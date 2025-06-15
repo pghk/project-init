@@ -10,9 +10,10 @@ For every task assigned, complete these steps in order:
 6. **Update Memory File** - Record current project state and relevant notes
 7. **Fix Issues** - Address any warnings or errors in the code
 8. **Update Guidelines** - Revise development guidelines based on learnings
-9. **Commit Changes** - Use descriptive commit message (see implementation guide)
-10. **Refactor Tests for Flexibility** - Review and refactor tests to focus on design requirements rather than implementation details
-11. **Stop** - End session to open new chat for next task
+9. **Review TODO List** - Check project design requirements and add any missing tasks needed to fulfill them
+10. **Commit Changes** - Use descriptive commit message (see implementation guide)
+11. **Refactor Tests for Flexibility** - Review and refactor tests to focus on design requirements rather than implementation details, then commit any test changes
+12. **Stop** - End session to open new chat for next task
 
 ---
 
@@ -110,7 +111,22 @@ Update development guidelines when you learn:
 - Useful techniques or tools
 - Important considerations for future work
 
-## 9. Committing Changes
+## 9. Reviewing TODO List
+
+### Design Requirements Review
+- Compare current project state against design requirements in README.md
+- Identify any missing functionality or incomplete features
+- Add new TODO items for any gaps found
+- Prioritize items based on project goals and dependencies
+- Ensure all design requirements have corresponding tasks
+
+### Task Addition Guidelines
+- Write clear, actionable task descriptions
+- Break down complex features into smaller, manageable tasks
+- Consider dependencies between tasks
+- Mark new tasks as uncompleted ([ ]) in TODO.md
+
+## 10. Committing Changes
 
 ### Pre-Commit Cleanup
 Before committing changes, ensure:
