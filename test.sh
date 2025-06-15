@@ -97,3 +97,88 @@
     fi
     [ "$different_found" = true ]
 }
+
+@test "create_project_directory creates directory successfully" {
+    source script.sh
+
+    # Generate a test folder name
+    test_folder=$(generate_folder_name)
+
+    # Ensure directory doesn't exist initially
+    [ ! -d "$test_folder" ]
+
+    # Create the directory
+    run create_project_directory "$test_folder"
+
+    # Should return success (exit code 0)
+    [ "$status" -eq 0 ]
+
+    # Directory should now exist
+    [ -d "$test_folder" ]
+
+    # Clean up
+    rmdir "$test_folder"
+}
+
+@test "create_project_directory handles existing directory gracefully" {
+    source script.sh
+
+    # Generate a test folder name
+    test_folder=$(generate_folder_name)
+
+    # Create directory manually first
+    mkdir "$test_folder"
+
+    # Try to create the same directory
+    run create_project_directory "$test_folder"
+
+    # Should return failure (non-zero exit code)
+    [ "$status" -ne 0 ]
+
+    # Directory should still exist
+    [ -d "$test_folder" ]
+
+    # Clean up
+    rmdir "$test_folder"
+}
+
+@test "create_project_directory with generated name creates unique directory" {
+    source script.sh
+
+    # Create directory using generated name
+    run create_project_directory
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should output the created directory name
+    [ -n "$output" ]
+
+    # Directory should exist
+    [ -d "$output" ]
+
+    # Clean up
+    rmdir "$output"
+}
+
+@test "create_project_directory returns created directory name" {
+    source script.sh
+
+    # Create directory using generated name
+    run create_project_directory
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Output should be a valid folder name format
+    [[ "$output" == *"-"* ]]
+
+    # Should match expected pattern (YMM-word)
+    [[ "$output" =~ ^[0-9]{3}-[a-z0-9-]+$ ]]
+
+    # Directory should exist
+    [ -d "$output" ]
+
+    # Clean up
+    rmdir "$output"
+}
