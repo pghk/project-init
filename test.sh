@@ -250,12 +250,10 @@
     # Test with no arguments (auto-generated name)
     run ./project-init
     [ "$status" -eq 0 ]
-    [[ "$output" =~ "Random memorable word:" ]]
-    [[ "$output" =~ "Generated folder name:" ]]
-    [[ "$output" =~ "Created project directory" ]]
 
-    # Extract created directory name and verify it exists
-    created_dir=$(echo "$output" | grep "Created project directory" | sed 's/.*: //')
+    # Output should be just the created directory name
+    created_dir="$output"
+    [[ "$created_dir" =~ ^[0-9]{3}-[a-z-]+$ ]]
     [ -d "$created_dir" ]
     [ -d "$created_dir/.git" ]
 
@@ -274,7 +272,7 @@
     custom_dir="main-custom-$$"
     run ./project-init "$custom_dir"
     [ "$status" -eq 0 ]
-    [[ "$output" =~ "Created project directory.*$custom_dir" ]]
+    [ "$output" = "$custom_dir" ]
     [ -d "$custom_dir" ]
 
     # Test error handling for existing directory

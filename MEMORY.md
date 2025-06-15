@@ -11,7 +11,7 @@ This is a bash project initializer called `project-init` that creates new develo
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
 - `initialize_git_repository()` function that initializes git repositories with initial commits
 - `create_project_with_git()` function that creates complete project setup with directory, boilerplate files, and git repository
-- `main()` function that handles command-line interface and script execution
+- `main()` function that handles command-line interface and script execution with clean output (demonstration messages removed)
 - `show_help()` function that displays comprehensive usage information with proper script name
 - Complete command-line interface with argument parsing and error handling
 - Initial git commit functionality that creates commits with all boilerplate files
@@ -80,9 +80,9 @@ This is a bash project initializer called `project-init` that creates new develo
 - Git functions handle existing repositories by adding new files and creating additional commits
 - Test suite designed to be flexible and focus on behavioral requirements rather than rigid implementation details
 - Command-line interface supports help flags (--help, -h, help) with comprehensive usage information
-- Main function provides informative output and proper exit codes
+- Main function provides clean, minimal output (just directory name on success) and proper exit codes
 - Error handling includes meaningful messages for common failure scenarios
-- Script demonstrates core functionality when run without arguments
+- Script creates projects silently with clean output when run without arguments
 - Proper argument validation with usage display for invalid inputs
 - Script executable as standalone command-line tool without requiring bash invocation
 
@@ -113,6 +113,8 @@ All design requirements from README.md have been completely implemented:
 - All documentation and tests updated to reflect new script name
 - Help text updated to show proper usage with `project-init` command
 - Added dedicated test case for command-line tool functionality
+- Removed demonstration output from main function for cleaner, production-ready behavior
+- Updated tests to expect minimal output (just directory name on success)
 
 Future enhancements could include:
 - Template directory dependency handling with environment variables and smart fallbacks

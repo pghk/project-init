@@ -232,24 +232,15 @@ main() {
             ;;
     esac
 
-    # Demonstrate core functionality
-    echo "Random memorable word: $(get_memorable_word)"
-    echo "Generated folder name: $(generate_folder_name)"
-    echo "Creating project directory with boilerplate and git..."
-
     # Create the project
     local created_dir
     created_dir=$(create_project_with_git "$directory_name")
     local exit_code=$?
 
     if [ $exit_code -eq 0 ]; then
-        echo "Created project directory with boilerplate and git: $created_dir"
-        echo "Files created:"
-        ls -la "$created_dir"
-        echo "Git repository initialized with initial commit"
+        echo "$created_dir"
         exit 0
     else
-        echo "Failed to create project directory with boilerplate and git" >&2
         exit $exit_code
     fi
 }
