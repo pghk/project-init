@@ -27,37 +27,38 @@
     name3=$(generate_folder_name)
 
     # Test 1: Verify date prefix format supports chronological sorting
-    # Extract date prefix (should be YYMM format)
-    if [[ "$name1" =~ ^([0-9]{4})-.*$ ]]; then
+    # Extract date prefix (should be YMM format - last digit of year + month)
+    if [[ "$name1" =~ ^([0-9]{3})-.*$ ]]; then
         date_part="${BASH_REMATCH[1]}"
 
-        # Should be current YYMM
-        current_yymm=$(date +%y%m)
-        [ "$date_part" = "$current_yymm" ]
+        # Should be current YMM (last digit of year + month)
+        current_year=$(date +%Y)
+        current_ymm="${current_year: -1}$(date +%m)"
+        [ "$date_part" = "$current_ymm" ]
 
-        # Verify format is chronologically sortable
-        # YYMM format naturally sorts chronologically: 2401 < 2402 < 2412 < 2501
-        [ ${#date_part} -eq 4 ]
-        [[ "$date_part" =~ ^[0-9]{4}$ ]]
+        # Verify format is chronologically sortable within same decade
+        # YMM format sorts chronologically: 501 < 502 < 512 < 601
+        [ ${#date_part} -eq 3 ]
+        [[ "$date_part" =~ ^[0-9]{3}$ ]]
     else
-        echo "Name doesn't match expected YYMM-word format: $name1"
+        echo "Name doesn't match expected YMM-word format: $name1"
         return 1
     fi
 
     # Test 2: Demonstrate chronological sorting capability
-    # Create test names representing different months
+    # Create test names representing different months within same decade
     test_names=(
-        "2401-alpha"   # January 2024
-        "2402-bravo"   # February 2024
-        "2412-charlie" # December 2024
-        "2501-delta"   # January 2025
+        "501-alpha"   # January 2025
+        "502-bravo"   # February 2025
+        "512-charlie" # December 2025
+        "601-delta"   # January 2026
     )
 
     # These should sort chronologically when sorted lexicographically
     IFS=$'\n' sorted_test_names=($(sort <<<"${test_names[*]}"))
 
     # Verify they sorted in chronological order
-    expected=("2401-alpha" "2402-bravo" "2412-charlie" "2501-delta")
+    expected=("501-alpha" "502-bravo" "512-charlie" "601-delta")
     for i in "${!expected[@]}"; do
         [ "${sorted_test_names[$i]}" = "${expected[$i]}" ]
     done
@@ -65,7 +66,8 @@
     # Test 3: Names from same month don't need to be chronologically ordered
     # (they have same date prefix, only word differs)
     # Just verify they all have the same date prefix
-    current_month=$(date +%y%m)
+    current_year=$(date +%Y)
+    current_month="${current_year: -1}$(date +%m)"
     for name in "$name1" "$name2" "$name3"; do
         [[ "$name" =~ ^${current_month}- ]]
     done

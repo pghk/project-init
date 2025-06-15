@@ -47,11 +47,11 @@ This is a bash project initializer that creates new development projects with bo
 - All tests passing with bats framework (16 tests total)
 - Tests refactored for flexibility - focus on design requirements rather than implementation details
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
-- `generate_folder_name()` uses `date +%y%m` for brief date format with memorable word
+- `generate_folder_name()` uses last digit of year plus month (YMM format) with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
 - `generate_boilerplate_files()` copies template files to create README.md, TODO.md, MEMORY.md, and AGENT.md files (always uses AGENT.md template)
 - `create_project_with_boilerplate()` combines directory creation with file generation
-- Folder name format: YMM-memorableword (e.g., "2406-lima")
+- Folder name format: YMM-memorableword (e.g., "506-lima" for June 2025)
 - Script is executable with proper shebang line
 - Boilerplate files include appropriate content templates for new projects
 - AGENT.md is always created from the generalized template file for language-agnostic development guidelines
@@ -74,3 +74,5 @@ Core folder name generation, directory creation, and template-based boilerplate 
 - Consider making the word selection algorithm configurable for different use cases
 - Consider adding templates for different project types (templates directory makes this easier to extend)
 - AGENT.md template provides comprehensive, language-agnostic development guidelines suitable for any project type
+- Year digit extraction implemented using method 2 (parameter expansion with %Y) to get last digit of current year
+- Date format changed from YYMM to YMM for more concise folder names while maintaining chronological sorting within decades

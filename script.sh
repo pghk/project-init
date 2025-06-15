@@ -17,7 +17,8 @@ get_memorable_word() {
 # Function to generate a unique folder name with date and memorable word
 generate_folder_name() {
     local memorable_word=$(get_memorable_word)
-    local brief_date=$(date +%y%m)
+    local current_year=$(date +%Y)
+    local brief_date="${current_year: -1}$(date +%m)"
     echo "${brief_date}-${memorable_word}"
 }
 
