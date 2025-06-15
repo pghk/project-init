@@ -52,9 +52,16 @@ If necessary, update the development guidelines to reflect anything you've learn
 ## Git Workflow
 - Initialize git repository at project start
 - Write descriptive commit messages with:
-  - Brief summary in first line
-  - Detailed explanation of changes
-  - List of specific implementations
+  1. Split subject and body with a single blank line.
+  2. Subject line
+     - ≤ 50 characters
+     - Capitalize first word
+     - No trailing period
+     - Use imperative mood (e.g. “Refactor” not “Refactored”)
+  3. Body (optional)
+     - Wrap at 72 characters
+     - Explain *what* and *why*—not *how*
+- Begin each commit message with an appropriate Gitmoji (listed in reference section)
 - Commit after each completed task with passing tests
 
 ## Task-Based Development Process
@@ -79,3 +86,70 @@ If necessary, update the development guidelines to reflect anything you've learn
 - Maintain MEMORY.md with current project state
 - Document technical decisions and implementation details
 - Include usage examples where helpful
+
+## Reference
+
+### Gitmoji
+This is a list of all Gitmoji entries from gitmoji.dev. Each item is a rule mapping the emoji to its meaning:
+
+- 🎨 Improve structure/format of the code
+- ⚡️ Improve performance
+- 🔥 Remove code or files
+- 🐛 Fix a bug
+- 🚑 Critical hotfix
+- ✨ Introduce new features
+- 📝 Add or update documentation
+- 🚀 Deploy stuff
+- 💄 Add or update the UI and style files
+- 🎉 Begin a project
+- ✅ Add or update tests
+- 🔒 Fix security issues
+- 🍎 Fix Apple‐specific issues
+- 🐧 Fix Linux‐specific issues
+- 🏁 Fix Windows‐specific issues
+- 🍏 Fix macOS‐specific issues
+- 🐳 Fix Docker‐specific issues
+- 🛂 Work on authentication/authorization
+- 🩹 Simple, non-critical fix
+- 💚 Fix CI build
+- 🍙 Add or update assets
+- 🏗 Make architectural changes
+- 📈 Add or update analytics/tracking code
+- ♻️ Refactor code
+- ➕ Add a dependency
+- ➖ Remove a dependency
+- 🔧 Add or update configuration files
+- 🔨 Add or update development scripts
+- 🌐 Internationalization/localization
+- ✏️ Fix typos
+- 💩 Write bad code that needs improvement
+- ⏪️ Revert changes
+- 🔀 Merge branches
+- 📦 Add or update compiled files or packages
+- 👷 Add or update CI build system
+- 🧪 Add a failing test
+- 🏷️ Add or update types (Flow, TS, etc.)
+- 🌱 Add or update seed files
+- 🚸 Improve UX/usability
+- ♿️ Improve accessibility
+- 💥 Introduce breaking changes
+- 🚨 Fix compiler/linter warnings
+- 🩺 Add or update health check
+- 💫 Add or update animations/transitions
+- 🗃️ Perform database-related changes
+- 🔍 Improve SEO
+- 🧱 Infrastructure/housekeeping
+- 🛠️ Add or update DevOps scripts
+- 🗑️ Deprecate code to be removed
+- 🧑‍💻 Improve developer experience
+- 👥 Add or update user permissions
+- 🚦 Add or update feature‐flag code
+- 🧵 Add or update multithreading code
+- 🔇 Remove logs
+- 🔈 Add logs
+- 🧮 Add or update calculation code
+- 🧹 Content cleanup
+- 🧼 Update code after security review
+- 🦺 Add or update environment variables
+- 🪛 Add or update CI/CD tools
+- 🪄 Add or update reproducible scripts
