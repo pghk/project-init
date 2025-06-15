@@ -9,8 +9,10 @@ This is a bash project initializer that creates new development projects with bo
 - `create_project_directory()` function that creates project directories with generated or specified names
 - `generate_boilerplate_files()` function that creates standard project files from templates in a directory (always uses template for AGENT.md)
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
+- `initialize_git_repository()` function that initializes git repositories in existing directories
+- `create_project_with_git()` function that creates complete project setup with directory, boilerplate files, and git repository
 - Memorable words array with 26 carefully selected words (alpha through zulu)
-- Comprehensive test suite using bats framework with 16 flexible test cases:
+- Comprehensive test suite using bats framework with 21 flexible test cases:
   - Validates filesystem-safe folder names suitable for directory creation
   - Tests chronologically sortable name generation capability
   - Validates memorable words suitable for folder naming
@@ -27,6 +29,11 @@ This is a bash project initializer that creates new development projects with bo
   - Tests appropriate AGENT.md file generation
   - Tests integrated project creation with boilerplate files
   - Tests project creation with specified directory names
+  - Tests git repository initialization in existing directories
+  - Tests error handling for git initialization in non-existent directories
+  - Tests graceful handling of existing git repositories
+  - Tests complete project creation with git repository initialization
+  - Tests project creation with git using specified directory names
 
 ## Project Structure
 - `script.sh`: Main bash script with project initialization functionality
@@ -44,13 +51,15 @@ This is a bash project initializer that creates new development projects with bo
 ## Technical Details
 - Uses bash RANDOM variable for random index generation
 - Script can be sourced for function access or run directly for demonstration
-- All tests passing with bats framework (16 tests total)
+- All tests passing with bats framework (21 tests total)
 - Tests refactored for flexibility - focus on design requirements rather than implementation details
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
 - `generate_folder_name()` uses last digit of year plus month (YMM format) with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
 - `generate_boilerplate_files()` copies template files to create README.md, TODO.md, MEMORY.md, and AGENT.md files (always uses AGENT.md template)
 - `create_project_with_boilerplate()` combines directory creation with file generation
+- `initialize_git_repository()` initializes git repositories with proper error handling
+- `create_project_with_git()` provides complete project setup including git repository initialization
 - Folder name format: YMM-memorableword (e.g., "506-lima" for June 2025)
 - Script is executable with proper shebang line
 - Boilerplate files include appropriate content templates for new projects
@@ -65,11 +74,13 @@ This is a bash project initializer that creates new development projects with bo
 - Directory creation includes error handling for existing directories
 - Boilerplate generation includes error handling for non-existent directories and missing template files
 - Functions return created directory name on success, error messages on failure
+- Git initialization uses `git init --quiet` for clean operation
+- Git functions handle non-existent directories and existing repositories gracefully
+- Complete project creation now includes git repository initialization by default
 - Test suite designed to be flexible and focus on behavioral requirements rather than rigid implementation details
 
 ## Next Steps
-Core folder name generation, directory creation, and template-based boilerplate file generation functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The project needs additional features to fulfill its goal as a project initializer:
-- Git repository initialization functionality
+Core folder name generation, directory creation, template-based boilerplate file generation, and git repository initialization functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The project needs additional features to fulfill its goal as a project initializer:
 - Main script logic to tie everything together
 - Consider making the word selection algorithm configurable for different use cases
 - Consider adding templates for different project types (templates directory makes this easier to extend)

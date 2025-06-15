@@ -110,17 +110,62 @@ create_project_with_boilerplate() {
     fi
 }
 
+# Function to initialize a git repository in a directory
+initialize_git_repository() {
+    local target_directory="$1"
+
+    # Check if directory exists
+    if [ ! -d "$target_directory" ]; then
+        echo "Error: Directory '$target_directory' does not exist" >&2
+        return 1
+    fi
+
+    # Initialize git repository
+    if (cd "$target_directory" && git init --quiet 2>/dev/null); then
+        return 0
+    else
+        echo "Error: Failed to initialize git repository in '$target_directory'" >&2
+        return 1
+    fi
+}
+
+# Function to create a project directory with boilerplate files and git repository
+create_project_with_git() {
+    local directory_name="$1"
+
+    # Create the directory and boilerplate files first
+    local created_dir
+    created_dir=$(create_project_with_boilerplate "$directory_name")
+    local create_exit_code=$?
+
+    # If project creation failed, return the error
+    if [ $create_exit_code -ne 0 ]; then
+        return $create_exit_code
+    fi
+
+    # Initialize git repository in the created directory
+    if initialize_git_repository "$created_dir"; then
+        echo "$created_dir"
+        return 0
+    else
+        echo "Error: Failed to initialize git repository in '$created_dir'" >&2
+        return 1
+    fi
+}
+
 # If script is run directly (not sourced), demonstrate the functions
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo "Random memorable word: $(get_memorable_word)"
     echo "Generated folder name: $(generate_folder_name)"
-    echo "Creating project directory with boilerplate..."
-    created_dir=$(create_project_with_boilerplate)
+    echo "Creating project directory with boilerplate and git..."
+    created_dir=$(create_project_with_git)
     if [ $? -eq 0 ]; then
-        echo "Created project directory with boilerplate: $created_dir"
+        echo "Created project directory with boilerplate and git: $created_dir"
         echo "Files created:"
         ls -la "$created_dir"
+        echo "Git repository initialized:"
+        (cd "$created_dir" && git status)
     else
-        echo "Failed to create project directory with boilerplate"
+        echo "Failed to create project directory with boilerplate and git"
     fi
 fi

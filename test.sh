@@ -406,3 +406,128 @@
     # Clean up
     rm -rf "$test_dir"
 }
+
+@test "initialize_git_repository creates git repository in directory" {
+    source script.sh
+
+    # Create a test directory
+    test_dir="test-git-$$"
+    mkdir "$test_dir"
+
+    # Initialize git repository
+    run initialize_git_repository "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should have created .git directory
+    [ -d "$test_dir/.git" ]
+
+    # Should be a valid git repository
+    cd "$test_dir"
+    run git status
+    [ "$status" -eq 0 ]
+    cd ..
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
+@test "initialize_git_repository handles non-existent directory" {
+    source script.sh
+
+    # Try to initialize git in non-existent directory
+    run initialize_git_repository "non-existent-dir-$$"
+
+    # Should return failure
+    [ "$status" -ne 0 ]
+
+    # Should output error message
+    [[ "$output" == *"Error"* ]]
+}
+
+@test "initialize_git_repository handles existing git repository gracefully" {
+    source script.sh
+
+    # Create a test directory with git repo
+    test_dir="test-existing-git-$$"
+    mkdir "$test_dir"
+    cd "$test_dir"
+    git init --quiet
+    cd ..
+
+    # Try to initialize git repository again
+    run initialize_git_repository "$test_dir"
+
+    # Should return success (reinitializing is safe)
+    [ "$status" -eq 0 ]
+
+    # Should still be a valid git repository
+    [ -d "$test_dir/.git" ]
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
+@test "create_project_with_git creates directory, files, and git repository" {
+    source script.sh
+
+    # Create project with git using generated name
+    run create_project_with_git
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should output the created directory name
+    [ -n "$output" ]
+
+    # Directory should exist
+    [ -d "$output" ]
+
+    # Standard files should exist
+    [ -f "$output/README.md" ]
+    [ -f "$output/TODO.md" ]
+    [ -f "$output/MEMORY.md" ]
+    [ -f "$output/AGENT.md" ]
+
+    # Git repository should be initialized
+    [ -d "$output/.git" ]
+
+    # Should be a valid git repository
+    cd "$output"
+    run git status
+    [ "$status" -eq 0 ]
+    cd ..
+
+    # Clean up
+    rm -rf "$output"
+}
+
+@test "create_project_with_git works with specified directory name" {
+    source script.sh
+
+    # Create project with git using specific name
+    test_dir="specific-git-project-$$"
+    run create_project_with_git "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should output the created directory name
+    [ "$output" = "$test_dir" ]
+
+    # Directory should exist
+    [ -d "$test_dir" ]
+
+    # Standard files should exist
+    [ -f "$test_dir/README.md" ]
+    [ -f "$test_dir/TODO.md" ]
+    [ -f "$test_dir/MEMORY.md" ]
+    [ -f "$test_dir/AGENT.md" ]
+
+    # Git repository should be initialized
+    [ -d "$test_dir/.git" ]
+
+    # Clean up
+    rm -rf "$test_dir"
+}
