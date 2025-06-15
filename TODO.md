@@ -12,6 +12,7 @@
 - [x] Refactor tests for flexibility to focus on design requirements rather than implementation details
 - [x] Update script to use method 2 for year digit extraction (parameter expansion with %Y)
 - [x] Implement git repository initialization
+- [x] Refactor the function `generate_boilerplate_files` - it shouldn't need to treat AGENT.md differently than the others
 - [ ] Create main script logic to tie everything together
 - [ ] Add command-line argument handling for user-specified directory names
 

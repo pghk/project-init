@@ -64,7 +64,7 @@ generate_boilerplate_files() {
     fi
 
     # Copy template files to target directory
-    local template_files=("README.md" "TODO.md" "MEMORY.md")
+    local template_files=("README.md" "TODO.md" "MEMORY.md" "AGENT.md")
 
     for template_file in "${template_files[@]}"; do
         if [ -f "templates/$template_file" ]; then
@@ -74,14 +74,6 @@ generate_boilerplate_files() {
             return 1
         fi
     done
-
-    # Create AGENT.md by always using template
-    if [ -f "templates/AGENT.md" ]; then
-        cp "templates/AGENT.md" "$target_directory/AGENT.md"
-    else
-        echo "Error: AGENT.md template not found" >&2
-        return 1
-    fi
 
     return 0
 }
