@@ -129,6 +129,10 @@ All design requirements from README.md have been completely implemented:
 3. ✅ Complete boilerplate file population
 4. ✅ Git repository initialization with initial commit
 
+Future enhancements could include:
+- Making the word selection algorithm configurable for different use cases
+- Adding templates for different project types
+
 ### Technical Excellence
 - Robust error handling with meaningful user feedback
 - Flexible test suite focused on behavioral requirements
