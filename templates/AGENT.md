@@ -119,7 +119,6 @@ When writing or updating project documentation:
 - **Front-load key features**: Place design requirements and core capabilities prominently near the top, before installation details
 - **Use progressive disclosure**: Structure information from most important (identity, purpose, key features) to implementation details (installation, configuration)
 - **Focus on user value**: Emphasize what the tool does for users rather than how it works internally
-- **Test documentation structure**: Include tests that verify documentation contains required sections and content in the correct order
 
 ### Template Synchronization
 **Always check if guideline updates should be synchronized to templates:**
