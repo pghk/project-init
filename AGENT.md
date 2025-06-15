@@ -46,6 +46,17 @@ For every task assigned, complete these steps in order:
 - Edge cases and boundary conditions
 - Format validation (separators, case sensitivity, etc.)
 
+### Test Maintainability Guidelines
+- Organize tests by design requirements, not implementation details
+- Use descriptive test names that explain what behavior is being validated
+- Focus on behavioral outcomes rather than internal implementation
+- Consolidate redundant tests to reduce maintenance burden
+- Group related assertions within single test cases where logical
+- Use `run` command for testing error conditions and exit codes
+- Test both success and failure paths for critical functionality
+- Prefer fewer, comprehensive tests over many granular tests
+- Design tests to be resilient to implementation changes
+
 ## 3. Code Implementation
 
 ### Bash Scripting Standards

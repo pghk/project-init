@@ -1,4 +1,0 @@
-- [ ] Set up project structure
-- [ ] Add initial implementation
-- [ ] Write tests
-- [ ] Update documentation
