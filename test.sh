@@ -1,10 +1,10 @@
 #!/usr/bin/env bats
 
-# Test for project initializer folder name generation
+# Tests for project initializer folder name generation
 
-@test "get_date_nato returns properly formatted folder name" {
+@test "generate_folder_name returns properly formatted folder name" {
     source script.sh
-    result=$(get_date_nato)
+    result=$(generate_folder_name)
 
     # Should be non-empty
     [ -n "$result" ]
@@ -28,9 +28,9 @@
     [[ "$word_part" =~ ^[a-z0-9-]+$ ]]
 }
 
-@test "get_date_nato returns chronologically sortable date" {
+@test "generate_folder_name returns chronologically sortable date" {
     source script.sh
-    result=$(get_date_nato)
+    result=$(generate_folder_name)
 
     # Extract date part (before the dash)
     date_part=$(echo "$result" | cut -d'-' -f1)
@@ -44,9 +44,9 @@
     [ "$date_part" = "$current_date" ]
 }
 
-@test "get_lowercase_nato_word returns memorable word" {
+@test "get_memorable_word returns memorable word" {
     source script.sh
-    result=$(get_lowercase_nato_word)
+    result=$(get_memorable_word)
 
     # Should be non-empty
     [ -n "$result" ]
@@ -64,13 +64,13 @@
     [ "$word_length" -le 10 ]
 }
 
-@test "get_date_nato generates unique folder names" {
+@test "generate_folder_name generates unique folder names" {
     source script.sh
 
     # Generate multiple folder names
-    result1=$(get_date_nato)
-    result2=$(get_date_nato)
-    result3=$(get_date_nato)
+    result1=$(generate_folder_name)
+    result2=$(generate_folder_name)
+    result3=$(generate_folder_name)
 
     # All should be non-empty
     [ -n "$result1" ]

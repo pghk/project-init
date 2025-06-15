@@ -3,3 +3,8 @@
 - [x] Refactor to simplify the code
 - [x] Remove extraneous code and tests
 - [x] Make tests more flexible by focusing on behavior rather than implementation details
+- [x] Refactor function names and comments to focus on behavior rather than implementation details
+- [ ] Implement project directory creation functionality
+- [ ] Add boilerplate file generation (README.md, TODO.md, MEMORY.md, AGENT.md)
+- [ ] Implement git repository initialization
+- [ ] Create main script logic to tie everything together
