@@ -481,23 +481,26 @@
     # Should output the created directory name
     [ -n "$output" ]
 
+    # Store directory name before it gets overwritten
+    local created_dir="$output"
+
     # Directory should exist
-    [ -d "$output" ]
+    [ -d "$created_dir" ]
 
     # Standard project files should exist
-    [ -f "$output/README.md" ]
-    [ -f "$output/TODO.md" ]
-    [ -f "$output/MEMORY.md" ]
-    [ -f "$output/AGENT.md" ]
+    [ -f "$created_dir/README.md" ]
+    [ -f "$created_dir/TODO.md" ]
+    [ -f "$created_dir/MEMORY.md" ]
+    [ -f "$created_dir/AGENT.md" ]
 
     # Project should be under version control
-    cd "$output"
+    cd "$created_dir"
     run git status
     [ "$status" -eq 0 ]
     cd ..
 
     # Clean up
-    rm -rf "$output"
+    rm -rf "$created_dir"
 }
 
 @test "create_project_with_git supports custom project names" {
