@@ -2,3 +2,4 @@
 - [x] Concatenate a brief date string with a lowercase NATO word
 - [x] Refactor to simplify the code
 - [x] Remove extraneous code and tests
+- [x] Make tests more flexible by focusing on behavior rather than implementation details
