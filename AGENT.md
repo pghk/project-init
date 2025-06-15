@@ -38,6 +38,8 @@ For every task assigned, complete these steps in order:
 - Use bats framework for bash script testing
 - Run tests with `bats test.sh`
 - Source scripts in tests to access functions: `source project-init`
+- Test resource discovery patterns with multiple scenarios (environment variables, fallbacks, error cases)
+- Verify error messages include helpful information about search paths
 
 ### Test Coverage Requirements
 - Valid output verification
@@ -78,12 +80,21 @@ For every task assigned, complete these steps in order:
 - Keep functions focused on single responsibilities
 - Use meaningful function and variable names
 
+### Resource Discovery Patterns
+- Implement fallback search patterns for external dependencies (files, directories)
+- Use environment variables for configuration overrides
+- Provide clear, ordered search paths with highest priority first
+- Include comprehensive error messages listing all searched locations
+- Create dedicated functions for resource discovery logic
+
 ### Template Management
 - Store boilerplate templates in a dedicated `templates/` directory
 - Use template files instead of heredocs for better maintainability
 - Validate template file existence before copying
 - Copy template files rather than using string concatenation for better performance
 - Keep templates simple and focused - avoid complex logic in template content
+- Implement fallback search for template directories to support different deployment scenarios
+- Support environment variable overrides for template directory location
 
 ## 4. Running Tests
 

@@ -24,4 +24,4 @@
 
 - [x] Rename script from `script.sh` to `project-init` for better command line usage
 - [x] Remove demonstration output from main function for cleaner production output
-- [ ] Handle templates directory dependency with environment variable and smart fallbacks (current dir, ~/.config/project-init/templates/, /usr/local/share/project-init/templates/)
+- [x] Handle templates directory dependency with environment variable and smart fallbacks (current dir, ~/.config/project-init/templates/, /usr/local/share/project-init/templates/)

@@ -47,6 +47,31 @@ create_project_directory() {
     fi
 }
 
+# Function to find templates directory with fallback paths
+find_templates_directory() {
+    # Priority order for template directory locations:
+    # 1. Environment variable PROJECT_INIT_TEMPLATES
+    # 2. Current directory ./templates
+    # 3. User config directory ~/.config/project-init/templates/
+    # 4. System directory /usr/local/share/project-init/templates/
+
+    local search_paths=(
+        "${PROJECT_INIT_TEMPLATES:-}"
+        "./templates"
+        "${HOME}/.config/project-init/templates"
+        "/usr/local/share/project-init/templates"
+    )
+
+    for path in "${search_paths[@]}"; do
+        if [ -n "$path" ] && [ -d "$path" ]; then
+            echo "$path"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 # Function to generate boilerplate files in a directory
 generate_boilerplate_files() {
     local target_directory="$1"
@@ -57,9 +82,15 @@ generate_boilerplate_files() {
         return 1
     fi
 
-    # Check if templates directory exists
-    if [ ! -d "templates" ]; then
-        echo "Error: Templates directory does not exist" >&2
+    # Find templates directory using fallback system
+    local templates_dir
+    templates_dir=$(find_templates_directory)
+    if [ $? -ne 0 ]; then
+        echo "Error: Templates directory not found in any of the following locations:" >&2
+        echo "  - \$PROJECT_INIT_TEMPLATES (environment variable)" >&2
+        echo "  - ./templates (current directory)" >&2
+        echo "  - ~/.config/project-init/templates/ (user config)" >&2
+        echo "  - /usr/local/share/project-init/templates/ (system)" >&2
         return 1
     fi
 
@@ -67,10 +98,10 @@ generate_boilerplate_files() {
     local template_files=("README.md" "TODO.md" "MEMORY.md" "AGENT.md")
 
     for template_file in "${template_files[@]}"; do
-        if [ -f "templates/$template_file" ]; then
-            cp "templates/$template_file" "$target_directory/$template_file"
+        if [ -f "$templates_dir/$template_file" ]; then
+            cp "$templates_dir/$template_file" "$target_directory/$template_file"
         else
-            echo "Error: Template file 'templates/$template_file' does not exist" >&2
+            echo "Error: Template file '$templates_dir/$template_file' does not exist" >&2
             return 1
         fi
     done
@@ -196,6 +227,17 @@ What this script creates:
   - MEMORY.md for project state tracking
   - AGENT.md with development guidelines
   - Git repository initialized and ready for commits
+
+Template Directory Configuration:
+  The script searches for templates in the following order:
+  1. $PROJECT_INIT_TEMPLATES (environment variable)
+  2. ./templates (current directory)
+  3. ~/.config/project-init/templates/ (user config)
+  4. /usr/local/share/project-init/templates/ (system)
+
+Environment Variables:
+  PROJECT_INIT_TEMPLATES    Custom path to templates directory
+                           Override default template search paths
 
 The generated directory name uses YMM format (last digit of year + month)
 followed by a memorable word for chronological sorting and easy recall.
