@@ -14,7 +14,16 @@ get_nato_word() {
     echo "${NATO_WORDS[random_index]}"
 }
 
-# If script is run directly (not sourced), demonstrate the function
+# Function to get a brief date string concatenated with a lowercase NATO word
+get_date_nato() {
+    local nato_word=$(get_nato_word)
+    local lowercase_nato=$(echo "$nato_word" | tr '[:upper:]' '[:lower:]')
+    local brief_date=$(date +%Y%m%d)
+    echo "${brief_date}-${lowercase_nato}"
+}
+
+# If script is run directly (not sourced), demonstrate the functions
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo "Random NATO alphabet word: $(get_nato_word)"
+    echo "Date with NATO word: $(get_date_nato)"
 fi
