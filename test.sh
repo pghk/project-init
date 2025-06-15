@@ -255,6 +255,67 @@
     rm -rf "$test_dir"
 }
 
+@test "template files exist and are readable" {
+    source script.sh
+
+    # Check that template directory exists
+    [ -d "templates" ]
+
+    # Check that all template files exist
+    [ -f "templates/README.md" ]
+    [ -f "templates/TODO.md" ]
+    [ -f "templates/MEMORY.md" ]
+    [ -f "templates/AGENT.md" ]
+
+    # Template files should be non-empty
+    [ -s "templates/README.md" ]
+    [ -s "templates/TODO.md" ]
+    [ -s "templates/MEMORY.md" ]
+    [ -s "templates/AGENT.md" ]
+}
+
+@test "generate_boilerplate_files uses template files" {
+    source script.sh
+
+    # Create a test directory
+    test_dir="test-templates-$$"
+    mkdir "$test_dir"
+
+    # Generate boilerplate files
+    run generate_boilerplate_files "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Generated files should match template content
+    # We'll compare specific identifying content from templates
+
+    # Check README template content is used
+    if [ -f "templates/README.md" ]; then
+        # First line should match between template and generated file
+        template_first_line=$(head -n 1 "templates/README.md")
+        generated_first_line=$(head -n 1 "$test_dir/README.md")
+        [ "$template_first_line" = "$generated_first_line" ]
+    fi
+
+    # Check TODO template content is used
+    if [ -f "templates/TODO.md" ]; then
+        template_first_line=$(head -n 1 "templates/TODO.md")
+        generated_first_line=$(head -n 1 "$test_dir/TODO.md")
+        [ "$template_first_line" = "$generated_first_line" ]
+    fi
+
+    # Check MEMORY template content is used
+    if [ -f "templates/MEMORY.md" ]; then
+        template_first_line=$(head -n 1 "templates/MEMORY.md")
+        generated_first_line=$(head -n 1 "$test_dir/MEMORY.md")
+        [ "$template_first_line" = "$generated_first_line" ]
+    fi
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
 @test "create_project_with_boilerplate creates directory and files together" {
     source script.sh
 

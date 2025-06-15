@@ -65,6 +65,13 @@ For every task assigned, complete these steps in order:
 - Keep functions focused on single responsibilities
 - Use meaningful function and variable names
 
+### Template Management
+- Store boilerplate templates in a dedicated `templates/` directory
+- Use template files instead of heredocs for better maintainability
+- Validate template file existence before copying
+- Copy template files rather than using string concatenation for better performance
+- Keep templates simple and focused - avoid complex logic in template content
+
 ## 4. Running Tests
 
 Always execute `bats test.sh` to verify:

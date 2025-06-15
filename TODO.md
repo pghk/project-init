@@ -7,5 +7,6 @@
 - [x] Simplify date format from YYYYMMDD to YMM for more brief folder names
 - [x] Implement project directory creation functionality
 - [x] Add boilerplate file generation (README.md, TODO.md, MEMORY.md, AGENT.md)
+- [x] Move boilerplate templates to separate markdown files in their own directory
 - [ ] Implement git repository initialization
 - [ ] Create main script logic to tie everything together

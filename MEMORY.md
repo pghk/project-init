@@ -7,7 +7,7 @@ This is a bash project initializer that creates new development projects with bo
 - `get_memorable_word()` function that returns a random memorable word for folder naming
 - `generate_folder_name()` function that creates unique folder names with brief date (YMM) and memorable word
 - `create_project_directory()` function that creates project directories with generated or specified names
-- `generate_boilerplate_files()` function that creates standard project files in a directory
+- `generate_boilerplate_files()` function that creates standard project files from templates in a directory
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
 - Comprehensive test suite using bats framework with 13 behavioral test cases:
@@ -28,35 +28,42 @@ This is a bash project initializer that creates new development projects with bo
 ## Project Structure
 - `script.sh`: Main bash script with project initialization functionality
 - `test.sh`: Bats test framework file with comprehensive tests
+- `templates/`: Directory containing boilerplate file templates
+  - `templates/README.md`: Project README template
+  - `templates/TODO.md`: Task tracking template
+  - `templates/MEMORY.md`: Project memory template
+  - `templates/AGENT.md`: Development rules template
 - `README.md`: Project description and overview
-- `TODO.md`: Task tracking (boilerplate generation task completed)
+- `TODO.md`: Task tracking (template extraction task completed)
 - `AGENT.md`: Development rules and guidelines
 - `MEMORY.md`: This file - project state tracking
 
 ## Technical Details
 - Uses bash RANDOM variable for random index generation
 - Script can be sourced for function access or run directly for demonstration
-- All tests passing with bats framework (13 tests total)
+- All tests passing with bats framework (15 tests total)
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
 - `generate_folder_name()` uses `date +%y%m` for brief date format with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
-- `generate_boilerplate_files()` creates README.md, TODO.md, MEMORY.md, and AGENT.md files
+- `generate_boilerplate_files()` copies template files to create README.md, TODO.md, MEMORY.md, and AGENT.md files
 - `create_project_with_boilerplate()` combines directory creation with file generation
 - Folder name format: YMM-memorableword (e.g., "2406-lima")
 - Script is executable with proper shebang line
 - Boilerplate files include appropriate content templates for new projects
-- AGENT.md is copied from current project if available, otherwise uses fallback template
+- AGENT.md is copied from current project if available, otherwise uses template file
+- Template files are stored in `templates/` directory for better maintainability
+- Boilerplate generation uses file copying from templates instead of heredocs
 - Clean implementation focused on project initialization behavior
 - Function names and comments focus on what they do, not how they do it
 - Tests focus on behavioral requirements rather than implementation details
 - Flexible design allows for future changes to word selection algorithm
 - Directory creation includes error handling for existing directories
-- Boilerplate generation includes error handling for non-existent directories
+- Boilerplate generation includes error handling for non-existent directories and missing template files
 - Functions return created directory name on success, error messages on failure
 
 ## Next Steps
-Core folder name generation, directory creation, and boilerplate file generation functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The project needs additional features to fulfill its goal as a project initializer:
+Core folder name generation, directory creation, and template-based boilerplate file generation functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The project needs additional features to fulfill its goal as a project initializer:
 - Git repository initialization functionality
 - Main script logic to tie everything together
 - Consider making the word selection algorithm configurable for different use cases
-- Consider adding templates for different project types
+- Consider adding templates for different project types (templates directory makes this easier to extend)

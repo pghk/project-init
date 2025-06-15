@@ -56,88 +56,32 @@ generate_boilerplate_files() {
         return 1
     fi
 
-    # Create README.md
-    cat > "$target_directory/README.md" << 'EOF'
-# Project
+    # Check if templates directory exists
+    if [ ! -d "templates" ]; then
+        echo "Error: Templates directory does not exist" >&2
+        return 1
+    fi
 
-## Description
-A new project created with the project initializer.
+    # Copy template files to target directory
+    local template_files=("README.md" "TODO.md" "MEMORY.md")
 
-## Getting Started
-Add your project setup instructions here.
+    for template_file in "${template_files[@]}"; do
+        if [ -f "templates/$template_file" ]; then
+            cp "templates/$template_file" "$target_directory/$template_file"
+        else
+            echo "Error: Template file 'templates/$template_file' does not exist" >&2
+            return 1
+        fi
+    done
 
-## Usage
-Add usage instructions here.
-
-## Contributing
-Add contribution guidelines here.
-EOF
-
-    # Create TODO.md
-    cat > "$target_directory/TODO.md" << 'EOF'
-- [ ] Set up project structure
-- [ ] Add initial implementation
-- [ ] Write tests
-- [ ] Update documentation
-EOF
-
-    # Create MEMORY.md
-    cat > "$target_directory/MEMORY.md" << 'EOF'
-# Project Memory
-
-## Current State
-New project created with boilerplate files.
-
-## Implemented Features
-- Basic project structure
-- Standard boilerplate files
-
-## Project Structure
-- `README.md`: Project overview and documentation
-- `TODO.md`: Task tracking
-- `MEMORY.md`: This file - project state tracking
-
-## Technical Details
-Add technical implementation details here as the project develops.
-
-## Next Steps
-- Define project requirements
-- Implement core functionality
-- Add comprehensive tests
-- Update documentation
-EOF
-
-    # Create AGENT.md by copying from current project
+    # Create AGENT.md by copying from current project first, then fallback to template
     if [ -f "AGENT.md" ]; then
         cp "AGENT.md" "$target_directory/AGENT.md"
+    elif [ -f "templates/AGENT.md" ]; then
+        cp "templates/AGENT.md" "$target_directory/AGENT.md"
     else
-        cat > "$target_directory/AGENT.md" << 'EOF'
-# General Development Rules
-
-You should do task-based development. For every task, you should write the tests, implement the code, and run the tests to make sure everything works.
-
-When the tests pass:
-* Update the todo list to reflect the task being completed
-* Update the memory file to reflect the current state of the project
-* Fix any warnings or errors in the code
-* Commit the changes to the repository with a descriptive commit message
-* Update the development guidelines to reflect anything that you've learned while working on the project
-* Stop and we will open a new chat for the next task
-
-## Retain Memory
-
-There will be a memory file for every project.
-
-The memory file will contain the state of the project, and any notes or relevant details you'd need to remember between chats.
-
-Keep it up to date based on the project's current state.
-
-Do not annotate task completion in the memory file. It will be tracked in the to-do list.
-
-## Update development guidelines
-
-If necessary, update the development guidelines to reflect anything you've learned while working on the project.
-EOF
+        echo "Error: No AGENT.md template found" >&2
+        return 1
     fi
 
     return 0
