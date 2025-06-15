@@ -1,6 +1,19 @@
 # Project Initializer
 
-This is a simple bash script for starting new development projects.
+This is a simple bash script called `project-init` for starting new development projects with proper boilerplate structure and git initialization.
+
+## Usage
+
+```bash
+# Create project with auto-generated name
+./project-init
+
+# Create project with custom name
+./project-init my-project-name
+
+# Show help
+./project-init --help
+```
 
 ## Design Requirements
 

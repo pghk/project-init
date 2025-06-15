@@ -37,7 +37,7 @@ For every task assigned, complete these steps in order:
 ### Testing Framework
 - Use bats framework for bash script testing
 - Run tests with `bats test.sh`
-- Source scripts in tests to access functions: `source script.sh`
+- Source scripts in tests to access functions: `source project-init`
 
 ### Test Coverage Requirements
 - Valid output verification

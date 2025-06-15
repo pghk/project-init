@@ -30,7 +30,7 @@ This is a bash project initializer that creates new development projects with bo
   - Tests template system provides consistent boilerplate structure
 
 ## Project Structure
-- `script.sh`: Main bash script with project initialization functionality
+- `project-init`: Main bash script with project initialization functionality (renamed for better command-line usage)
 - `test.sh`: Bats test framework file with comprehensive tests
 - `templates/`: Directory containing boilerplate file templates
   - `templates/README.md`: Project README template
@@ -58,7 +58,7 @@ This is a bash project initializer that creates new development projects with bo
 - `initialize_git_repository()` initializes git repositories with proper error handling
 - `create_project_with_git()` provides complete project setup including git repository initialization
 - Folder name format: YMM-memorableword (e.g., "506-lima" for June 2025)
-- Script is executable with proper shebang line
+- Script is executable with proper shebang line and renamed to `project-init` for professional command-line usage
 - Boilerplate files include appropriate content templates for new projects
 - AGENT.md is created from the generalized template file for language-agnostic development guidelines (handled uniformly with other templates)
 - Template files are stored in `templates/` directory for better maintainability

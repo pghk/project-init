@@ -5,7 +5,7 @@
 # Design Requirement 1: Folder name generation (brief, memorable, unique, chronologically sortable)
 
 @test "folder names are brief, memorable, and filesystem-safe" {
-    source script.sh
+    source project-init
 
     # Test multiple generated names
     for i in {1..5}; do
@@ -30,7 +30,7 @@
 }
 
 @test "folder names are chronologically sortable within 10-year span" {
-    source script.sh
+    source project-init
 
     # Verify current names use YMM format
     name=$(generate_folder_name)
@@ -60,7 +60,7 @@
 }
 
 @test "folder names provide uniqueness through variation" {
-    source script.sh
+    source project-init
 
     # Generate multiple names and verify they can vary
     names=()
@@ -77,7 +77,7 @@
 # Design Requirement 2: Support for both auto-generated and user-specified directory names
 
 @test "supports both auto-generated and custom directory names" {
-    source script.sh
+    source project-init
 
     # Test auto-generated directory creation
     auto_dir=$(create_project_directory)
@@ -104,7 +104,7 @@
 # Design Requirement 3: Populate folder with boilerplate files
 
 @test "creates all required boilerplate files with appropriate content" {
-    source script.sh
+    source project-init
 
     # Create test directory and generate boilerplate
     test_dir="boilerplate-test-$$"
@@ -136,7 +136,7 @@
 }
 
 @test "integrated project creation with boilerplate works end-to-end" {
-    source script.sh
+    source project-init
 
     # Test with auto-generated name
     auto_project=$(create_project_with_boilerplate)
@@ -167,7 +167,7 @@
 # Design Requirement 4: Initialize git repository with initial commit
 
 @test "initializes git repository with proper initial commit" {
-    source script.sh
+    source project-init
 
     # Create project directory with boilerplate
     test_dir="git-test-$$"
@@ -200,7 +200,7 @@
 }
 
 @test "complete project creation with git integration works end-to-end" {
-    source script.sh
+    source project-init
 
     # Test with auto-generated name
     auto_project=$(create_project_with_git)
@@ -239,16 +239,16 @@
 
 @test "main script supports all design requirements through command-line interface" {
     # Test script can be executed directly
-    [ -x "./script.sh" ]
+    [ -x "./project-init" ]
 
     # Test help functionality
-    run ./script.sh --help
+    run ./project-init --help
     [ "$status" -eq 0 ]
     [[ "$output" =~ "Usage:" ]]
     [[ "$output" =~ "directory_name" ]]
 
     # Test with no arguments (auto-generated name)
-    run ./script.sh
+    run ./project-init
     [ "$status" -eq 0 ]
     [[ "$output" =~ "Random memorable word:" ]]
     [[ "$output" =~ "Generated folder name:" ]]
@@ -272,18 +272,18 @@
 @test "main script handles custom directory names and error cases" {
     # Test with custom directory name
     custom_dir="main-custom-$$"
-    run ./script.sh "$custom_dir"
+    run ./project-init "$custom_dir"
     [ "$status" -eq 0 ]
     [[ "$output" =~ "Created project directory.*$custom_dir" ]]
     [ -d "$custom_dir" ]
 
     # Test error handling for existing directory
-    run ./script.sh "$custom_dir"
+    run ./project-init "$custom_dir"
     [ "$status" -ne 0 ]
     [[ "$output" =~ "already exists" ]]
 
     # Test error handling for too many arguments
-    run ./script.sh arg1 arg2
+    run ./project-init arg1 arg2
     [ "$status" -ne 0 ]
     [[ "$output" =~ "Too many arguments" ]]
 
@@ -294,7 +294,7 @@
 # Template system validation
 
 @test "template system provides consistent boilerplate structure" {
-    source script.sh
+    source project-init
 
     # Verify templates directory exists
     [ -d "templates" ]
@@ -322,4 +322,30 @@
     done
 
     rm -rf "$test_dir"
+}
+
+# Command-line tool validation
+
+@test "renamed script works as proper command-line tool" {
+    # Test that project-init exists and is executable
+    [ -f "./project-init" ]
+    [ -x "./project-init" ]
+
+    # Test that script works without .sh extension
+    run ./project-init --help
+    [ "$status" -eq 0 ]
+    [[ "$output" =~ "project-init" ]]
+
+    # Test that script name appears in help output
+    [[ "$output" =~ "project-init" ]]
+
+    # Test basic functionality works with new name
+    custom_dir="cli-test-$$"
+    run ./project-init "$custom_dir"
+    [ "$status" -eq 0 ]
+    [ -d "$custom_dir" ]
+    [ -f "$custom_dir/README.md" ]
+
+    # Cleanup
+    rm -rf "$custom_dir"
 }

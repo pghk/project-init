@@ -173,8 +173,8 @@ show_help() {
     cat << 'EOF'
 Project Initializer - Create new development projects with boilerplate files
 
-Usage: ./script.sh [directory_name]
-       ./script.sh [--help|-h|help]
+Usage: ./project-init [directory_name]
+       ./project-init [--help|-h|help]
 
 Arguments:
   directory_name    Optional name for the project directory
@@ -185,9 +185,9 @@ Options:
   --help, -h, help  Show this help message
 
 Examples:
-  ./script.sh                    # Create project with generated name
-  ./script.sh my-project         # Create project named "my-project"
-  ./script.sh --help             # Show this help message
+  ./project-init                    # Create project with generated name
+  ./project-init my-project         # Create project named "my-project"
+  ./project-init --help             # Show this help message
 
 What this script creates:
   - Project directory with specified or generated name

@@ -21,3 +21,6 @@
 - [x] Make script executable as a proper command-line project initializer tool
 - [x] Add usage instructions and help text for the command-line interface
 - [x] Add initial git commit functionality to complete git repository setup
+
+- [x] Rename script from `script.sh` to `project-init` for better command line usage
+- [ ] Handle templates directory dependency with environment variable and smart fallbacks (current dir, ~/.config/project-init/templates/, /usr/local/share/project-init/templates/)
