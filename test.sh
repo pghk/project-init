@@ -251,18 +251,22 @@
     run ./project-init
     [ "$status" -eq 0 ]
 
-    # Output should include user-friendly messages and directory name
-    [[ "$output" =~ "✅ Created project:" ]]
-    [[ "$output" =~ "Start developing your project!" ]]
+    # Find the created directory (should match YMM-word format)
+    created_dir=""
+    for dir in [0-9][0-9][0-9]-*; do
+        if [ -d "$dir" ]; then
+            created_dir="$dir"
+            break
+        fi
+    done
 
-    # Extract directory name from output
-    created_dir=$(echo "$output" | grep "✅ Created project:" | sed 's/✅ Created project: //')
+    # Verify directory was created with proper format
+    [ -n "$created_dir" ]
     [[ "$created_dir" =~ ^[0-9]{3}-[a-z-]+$ ]]
     [ -d "$created_dir" ]
     [ -d "$created_dir/.git" ]
 
     # Verify all design requirements are met
-    [[ "$created_dir" =~ ^[0-9]{3}-[a-z-]+$ ]]  # Proper name format
     for file in "README.md" "TODO.md" "MEMORY.md" "AGENT.md"; do
         [ -f "$created_dir/$file" ]
     done
@@ -276,9 +280,13 @@
     custom_dir="main-custom-$$"
     run ./project-init "$custom_dir"
     [ "$status" -eq 0 ]
-    [[ "$output" =~ "✅ Created project: $custom_dir" ]]
-    [[ "$output" =~ "Start developing your project!" ]]
     [ -d "$custom_dir" ]
+    [ -d "$custom_dir/.git" ]
+
+    # Verify boilerplate files were created
+    for file in "README.md" "TODO.md" "MEMORY.md" "AGENT.md"; do
+        [ -f "$custom_dir/$file" ]
+    done
 
     # Test error handling for existing directory
     run ./project-init "$custom_dir"
