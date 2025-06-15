@@ -6,17 +6,20 @@ This is a simple bash script called `project-init` for starting new development 
 
 ### Quick Install (Recommended)
 
-Download and install the latest version:
+Clone the repository and install:
 
 ```bash
-# Download the script
-curl -O https://raw.githubusercontent.com/yourusername/project-init/main/project-init
+# Clone the repository with templates
+git clone https://github.com/pghk/project-init.git
+cd project-init/init
 
-# Make it executable
+# Make the script executable
 chmod +x project-init
 
-# Move to a directory in your PATH
-sudo mv project-init /usr/local/bin/
+# Install script and templates system-wide
+sudo mkdir -p /usr/local/share/project-init/templates/
+sudo cp -r templates/* /usr/local/share/project-init/templates/
+sudo cp project-init /usr/local/bin/
 
 # Verify installation
 project-init --help
@@ -26,7 +29,7 @@ project-init --help
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/project-init.git
+   git clone https://github.com/pghk/project-init.git
    cd project-init/init
    ```
 
@@ -35,8 +38,12 @@ project-init --help
    chmod +x project-init
    ```
 
-3. (Optional) Add to your PATH:
+3. Install templates and add to your PATH:
    ```bash
+   # Copy templates to user config directory
+   mkdir -p ~/.config/project-init/templates/
+   cp -r templates/* ~/.config/project-init/templates/
+   
    # Add to ~/.bashrc or ~/.zshrc
    export PATH="$PATH:/path/to/project-init/init"
    
