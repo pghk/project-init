@@ -102,7 +102,7 @@ create_project_with_boilerplate() {
     fi
 }
 
-# Function to initialize a git repository in a directory
+# Function to initialize a git repository in a directory with initial commit
 initialize_git_repository() {
     local target_directory="$1"
 
@@ -112,11 +112,34 @@ initialize_git_repository() {
         return 1
     fi
 
-    # Initialize git repository
-    if (cd "$target_directory" && git init --quiet 2>/dev/null); then
+    # Initialize git repository and create initial commit
+    if (cd "$target_directory" && {
+        # Initialize git repository if not already initialized
+        if [ ! -d ".git" ]; then
+            git init --quiet 2>/dev/null || return 1
+        fi
+
+        # Configure git user if not already configured
+        if [ -z "$(git config user.name 2>/dev/null)" ]; then
+            git config user.name "Project Initializer" 2>/dev/null || return 1
+        fi
+        if [ -z "$(git config user.email 2>/dev/null)" ]; then
+            git config user.email "init@example.com" 2>/dev/null || return 1
+        fi
+
+        # Add files and create initial commit if there are changes to commit
+        git add . 2>/dev/null || return 1
+
+        # Only commit if there are changes to commit
+        if ! git diff --cached --quiet 2>/dev/null; then
+            git commit --quiet -m "🎉 Initial commit with project boilerplate" 2>/dev/null || return 1
+        fi
+
+        return 0
+    }); then
         return 0
     else
-        echo "Error: Failed to initialize git repository in '$target_directory'" >&2
+        echo "Error: Failed to initialize git repository with initial commit in '$target_directory'" >&2
         return 1
     fi
 }
@@ -145,18 +168,93 @@ create_project_with_git() {
     fi
 }
 
-# If script is run directly (not sourced), demonstrate the functions
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+# Function to display help information
+show_help() {
+    cat << 'EOF'
+Project Initializer - Create new development projects with boilerplate files
+
+Usage: ./script.sh [directory_name]
+       ./script.sh [--help|-h|help]
+
+Arguments:
+  directory_name    Optional name for the project directory
+                   If not provided, a unique name will be generated
+                   using format: YMM-memorableword (e.g., 506-lima)
+
+Options:
+  --help, -h, help  Show this help message
+
+Examples:
+  ./script.sh                    # Create project with generated name
+  ./script.sh my-project         # Create project named "my-project"
+  ./script.sh --help             # Show this help message
+
+What this script creates:
+  - Project directory with specified or generated name
+  - README.md with project overview template
+  - TODO.md for task tracking
+  - MEMORY.md for project state tracking
+  - AGENT.md with development guidelines
+  - Git repository initialized and ready for commits
+
+The generated directory name uses YMM format (last digit of year + month)
+followed by a memorable word for chronological sorting and easy recall.
+EOF
+}
+
+# Function to handle main script execution
+main() {
+    local directory_name=""
+
+    # Parse command line arguments
+    case "$#" in
+        0)
+            # No arguments - use generated name
+            directory_name=""
+            ;;
+        1)
+            case "$1" in
+                --help|-h|help)
+                    show_help
+                    exit 0
+                    ;;
+                *)
+                    # Single argument - use as directory name
+                    directory_name="$1"
+                    ;;
+            esac
+            ;;
+        *)
+            echo "Error: Too many arguments provided" >&2
+            echo "" >&2
+            show_help
+            exit 1
+            ;;
+    esac
+
+    # Demonstrate core functionality
     echo "Random memorable word: $(get_memorable_word)"
     echo "Generated folder name: $(generate_folder_name)"
     echo "Creating project directory with boilerplate and git..."
-    created_dir=$(create_project_with_git)
-    if [ $? -eq 0 ]; then
+
+    # Create the project
+    local created_dir
+    created_dir=$(create_project_with_git "$directory_name")
+    local exit_code=$?
+
+    if [ $exit_code -eq 0 ]; then
         echo "Created project directory with boilerplate and git: $created_dir"
         echo "Files created:"
         ls -la "$created_dir"
-        echo "Git repository initialized successfully"
+        echo "Git repository initialized with initial commit"
+        exit 0
     else
-        echo "Failed to create project directory with boilerplate and git"
+        echo "Failed to create project directory with boilerplate and git" >&2
+        exit $exit_code
     fi
+}
+
+# If script is run directly (not sourced), execute main function
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
 fi

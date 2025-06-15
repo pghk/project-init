@@ -13,9 +13,10 @@
 - [x] Update script to use method 2 for year digit extraction (parameter expansion with %Y)
 - [x] Implement git repository initialization
 - [x] Refactor the function `generate_boilerplate_files` - it shouldn't need to treat AGENT.md differently than the others
-- [ ] Create main script logic to tie everything together
-- [ ] Add command-line argument handling for user-specified directory names
+- [x] Create main script logic to tie everything together
+- [x] Add command-line argument handling for user-specified directory names
 
-- [ ] Add proper error handling and user feedback for main script execution
-- [ ] Make script executable as a proper command-line project initializer tool
-- [ ] Add usage instructions and help text for the command-line interface
+- [x] Add proper error handling and user feedback for main script execution
+- [x] Make script executable as a proper command-line project initializer tool
+- [x] Add usage instructions and help text for the command-line interface
+- [x] Add initial git commit functionality to complete git repository setup

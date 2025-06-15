@@ -9,10 +9,14 @@ This is a bash project initializer that creates new development projects with bo
 - `create_project_directory()` function that creates project directories with generated or specified names
 - `generate_boilerplate_files()` function that creates standard project files from templates in a directory (treats all template files uniformly)
 - `create_project_with_boilerplate()` function that creates directories and populates them with boilerplate files
-- `initialize_git_repository()` function that initializes git repositories in existing directories
+- `initialize_git_repository()` function that initializes git repositories with initial commits
 - `create_project_with_git()` function that creates complete project setup with directory, boilerplate files, and git repository
+- `main()` function that handles command-line interface and script execution
+- `show_help()` function that displays comprehensive usage information
+- Complete command-line interface with argument parsing and error handling
+- Initial git commit functionality that creates commits with all boilerplate files
 - Memorable words array with 26 carefully selected words (alpha through zulu)
-- Comprehensive test suite using bats framework with 21 flexible test cases:
+- Comprehensive test suite using bats framework with 36 flexible test cases:
   - Validates filesystem-safe folder names suitable for directory creation
   - Tests chronologically sortable name generation capability
   - Validates memorable words suitable for folder naming
@@ -34,6 +38,20 @@ This is a bash project initializer that creates new development projects with bo
   - Tests graceful handling of existing git repositories
   - Tests complete project creation with git repository initialization
   - Tests project creation with git using specified directory names
+  - Tests main script execution with no arguments (automatic name generation)
+  - Tests main script execution with specified directory names
+  - Tests help information display for various help flags
+  - Tests invalid argument handling with appropriate error messages
+  - Tests meaningful error messages for directory creation failures
+  - Tests informative success messages for project creation
+  - Tests core functionality demonstration when run without arguments
+  - Tests script executable permissions and proper shebang line
+  - Tests direct script execution without bash invocation
+  - Tests git repository initialization with initial commit
+  - Tests appropriate commit messages for initial commits
+  - Tests that all boilerplate files are included in initial commit
+  - Tests graceful handling of existing git repositories with new commits
+  - Tests main script creates projects with initial commits
 
 ## Project Structure
 - `script.sh`: Main bash script with project initialization functionality
@@ -50,9 +68,12 @@ This is a bash project initializer that creates new development projects with bo
 
 ## Technical Details
 - Uses bash RANDOM variable for random index generation
-- Script can be sourced for function access or run directly for demonstration
-- All tests passing with bats framework (21 tests total)
+- Script can be sourced for function access or run directly as command-line tool
+- All tests passing with bats framework (36 tests total)
 - Tests refactored for flexibility - focus on design requirements rather than implementation details
+- Complete command-line interface with help system and error handling
+- Main script logic handles 0-1 arguments with comprehensive validation
+- Script has proper executable permissions and shebang line for command-line use
 - `get_memorable_word()` returns one of 26 carefully selected memorable words
 - `generate_folder_name()` uses last digit of year plus month (YMM format) with memorable word
 - `create_project_directory()` creates directories and handles errors gracefully
@@ -76,14 +97,43 @@ This is a bash project initializer that creates new development projects with bo
 - Functions return created directory name on success, error messages on failure
 - Git initialization uses `git init --quiet` for clean operation
 - Git functions handle non-existent directories and existing repositories gracefully
-- Complete project creation now includes git repository initialization by default
+- Complete project creation now includes git repository initialization with initial commit by default
+- Git initialization includes automatic user configuration for commits
+- Initial commits include all boilerplate files with descriptive commit message using gitmoji
+- Git functions handle existing repositories by adding new files and creating additional commits
 - Test suite designed to be flexible and focus on behavioral requirements rather than rigid implementation details
+- Command-line interface supports help flags (--help, -h, help) with comprehensive usage information
+- Main function provides informative output and proper exit codes
+- Error handling includes meaningful messages for common failure scenarios
+- Script demonstrates core functionality when run without arguments
+- Proper argument validation with usage display for invalid inputs
+- Script executable as standalone command-line tool without requiring bash invocation
 
-## Next Steps
-Core folder name generation, directory creation, template-based boilerplate file generation, and git repository initialization functionality is complete with brief YMM date format, behavioral function names and comprehensive tests. The `generate_boilerplate_files()` function has been refactored to treat all template files uniformly, eliminating special handling for AGENT.md. The project needs additional features to fulfill its goal as a project initializer:
-- Main script logic to tie everything together
-- Consider making the word selection algorithm configurable for different use cases
-- Consider adding templates for different project types (templates directory makes this easier to extend)
-- AGENT.md template provides comprehensive, language-agnostic development guidelines suitable for any project type
-- Year digit extraction implemented using method 2 (parameter expansion with %Y) to get last digit of current year
-- Date format changed from YYMM to YMM for more concise folder names while maintaining chronological sorting within decades
+## Project Complete
+All design requirements have been successfully implemented. The project initializer is now a complete, fully functional command-line tool that meets all specified requirements:
+
+### Completed Features
+- ✅ Generates brief, memorable, unique, chronologically sortable folder names (YMM-word format)
+- ✅ Supports both auto-generated and user-specified directory names
+- ✅ Creates complete boilerplate file structure (README.md, TODO.md, MEMORY.md, AGENT.md)
+- ✅ Initializes git repository with initial commit containing all boilerplate files
+- ✅ Full command-line interface with help system and error handling
+- ✅ Executable as standalone tool with proper permissions and shebang
+- ✅ Comprehensive test suite with 36 test cases covering all functionality
+- ✅ Language-agnostic AGENT.md template for development guidelines
+
+### Design Requirements Fulfilled
+All design requirements from README.md have been completely implemented:
+1. ✅ Brief, memorable, unique, chronologically sortable folder names
+2. ✅ Support for both auto-generated and user-specified names
+3. ✅ Complete boilerplate file population
+4. ✅ Git repository initialization with initial commit
+
+### Technical Excellence
+- Robust error handling with meaningful user feedback
+- Flexible test suite focused on behavioral requirements
+- Clean, maintainable code with proper separation of concerns
+- Template-based file generation for easy extensibility
+- Graceful handling of edge cases and existing repositories
+
+The project is ready for production use as a complete project initializer tool.
