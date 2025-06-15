@@ -138,3 +138,11 @@ Future enhancements could include:
 - Professional command-line tool experience
 
 The project is complete and ready for production use as a fully-featured project initializer tool. All design requirements have been implemented with robust error handling, comprehensive testing, and professional command-line interface. The template directory fallback system provides flexibility for different deployment scenarios and user preferences.
+
+### Documentation Updates
+- ✅ Added comprehensive installation instructions to README.md including:
+  - Quick install method with curl download
+  - Manual installation from repository
+  - Template configuration options
+  - Environment variable setup for custom templates
+  - Updated usage examples to reflect proper command-line usage
