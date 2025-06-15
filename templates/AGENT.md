@@ -112,6 +112,14 @@ Update development guidelines when you learn:
 - Important considerations for future work
 - Language or framework-specific insights
 
+### Documentation Structure Best Practices
+When writing or updating project documentation:
+- **Lead with project identity**: First paragraph should clearly state what the tool/project is and its primary purpose
+- **Front-load key features**: Place design requirements and core capabilities prominently near the top, before installation details
+- **Use progressive disclosure**: Structure information from most important (identity, purpose, key features) to implementation details (installation, configuration)
+- **Focus on user value**: Emphasize what the tool does for users rather than how it works internally
+- **Test documentation structure**: Include tests that verify documentation contains required sections and content in the correct order
+
 ## 9. Committing Changes
 
 ### Pre-Commit Cleanup
