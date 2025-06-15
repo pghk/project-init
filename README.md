@@ -1,4 +1,4 @@
-# Project initializer
+# Project Initializer
 
 This is a simple bash script for starting new development projects.
 
