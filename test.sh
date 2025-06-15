@@ -21,21 +21,54 @@
 @test "generate_folder_name creates chronologically sortable names" {
     source script.sh
 
-    # Generate multiple folder names over a short time
-    result1=$(generate_folder_name)
-    sleep 1
-    result2=$(generate_folder_name)
+    # Generate a few names from current month
+    name1=$(generate_folder_name)
+    name2=$(generate_folder_name)
+    name3=$(generate_folder_name)
 
-    # Both should be non-empty and filesystem-safe
-    [ -n "$result1" ]
-    [ -n "$result2" ]
-    [[ "$result1" =~ ^[a-zA-Z0-9._-]+$ ]]
-    [[ "$result2" =~ ^[a-zA-Z0-9._-]+$ ]]
+    # Test 1: Verify date prefix format supports chronological sorting
+    # Extract date prefix (should be YYMM format)
+    if [[ "$name1" =~ ^([0-9]{4})-.*$ ]]; then
+        date_part="${BASH_REMATCH[1]}"
 
-    # Names should be suitable for chronological sorting
-    # This is a basic validation that the format supports sorting
-    # We don't enforce strict chronological ordering as that depends on timing
-    true
+        # Should be current YYMM
+        current_yymm=$(date +%y%m)
+        [ "$date_part" = "$current_yymm" ]
+
+        # Verify format is chronologically sortable
+        # YYMM format naturally sorts chronologically: 2401 < 2402 < 2412 < 2501
+        [ ${#date_part} -eq 4 ]
+        [[ "$date_part" =~ ^[0-9]{4}$ ]]
+    else
+        echo "Name doesn't match expected YYMM-word format: $name1"
+        return 1
+    fi
+
+    # Test 2: Demonstrate chronological sorting capability
+    # Create test names representing different months
+    test_names=(
+        "2401-alpha"   # January 2024
+        "2402-bravo"   # February 2024
+        "2412-charlie" # December 2024
+        "2501-delta"   # January 2025
+    )
+
+    # These should sort chronologically when sorted lexicographically
+    IFS=$'\n' sorted_test_names=($(sort <<<"${test_names[*]}"))
+
+    # Verify they sorted in chronological order
+    expected=("2401-alpha" "2402-bravo" "2412-charlie" "2501-delta")
+    for i in "${!expected[@]}"; do
+        [ "${sorted_test_names[$i]}" = "${expected[$i]}" ]
+    done
+
+    # Test 3: Names from same month don't need to be chronologically ordered
+    # (they have same date prefix, only word differs)
+    # Just verify they all have the same date prefix
+    current_month=$(date +%y%m)
+    for name in "$name1" "$name2" "$name3"; do
+        [[ "$name" =~ ^${current_month}- ]]
+    done
 }
 
 @test "get_memorable_word returns suitable word for folder naming" {
