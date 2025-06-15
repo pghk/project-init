@@ -6,6 +6,6 @@
 - [x] Refactor function names and comments to focus on behavior rather than implementation details
 - [x] Simplify date format from YYYYMMDD to YMM for more brief folder names
 - [x] Implement project directory creation functionality
-- [ ] Add boilerplate file generation (README.md, TODO.md, MEMORY.md, AGENT.md)
+- [x] Add boilerplate file generation (README.md, TODO.md, MEMORY.md, AGENT.md)
 - [ ] Implement git repository initialization
 - [ ] Create main script logic to tie everything together

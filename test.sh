@@ -182,3 +182,126 @@
     # Clean up
     rmdir "$output"
 }
+
+@test "generate_boilerplate_files creates standard project files" {
+    source script.sh
+
+    # Create a test directory
+    test_dir="test-project-$$"
+    mkdir "$test_dir"
+
+    # Generate boilerplate files
+    run generate_boilerplate_files "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Check that standard files were created
+    [ -f "$test_dir/README.md" ]
+    [ -f "$test_dir/TODO.md" ]
+    [ -f "$test_dir/MEMORY.md" ]
+    [ -f "$test_dir/AGENT.md" ]
+
+    # Files should be non-empty
+    [ -s "$test_dir/README.md" ]
+    [ -s "$test_dir/TODO.md" ]
+    [ -s "$test_dir/MEMORY.md" ]
+    [ -s "$test_dir/AGENT.md" ]
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
+@test "generate_boilerplate_files handles non-existent directory" {
+    source script.sh
+
+    # Try to generate files in non-existent directory
+    run generate_boilerplate_files "non-existent-dir-$$"
+
+    # Should return failure
+    [ "$status" -ne 0 ]
+
+    # Should output error message
+    [[ "$output" == *"Error"* ]]
+}
+
+@test "generate_boilerplate_files creates files with appropriate content" {
+    source script.sh
+
+    # Create a test directory
+    test_dir="test-content-$$"
+    mkdir "$test_dir"
+
+    # Generate boilerplate files
+    run generate_boilerplate_files "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # README should contain project title
+    grep -q "# Project" "$test_dir/README.md"
+
+    # TODO should be a markdown file with proper structure
+    grep -q "\[ \]" "$test_dir/TODO.md"
+
+    # MEMORY should have proper section headers
+    grep -q "# Project Memory" "$test_dir/MEMORY.md"
+    grep -q "## Current State" "$test_dir/MEMORY.md"
+
+    # AGENT should contain development rules
+    grep -q "# Agent Task Checklist" "$test_dir/AGENT.md"
+
+    # Clean up
+    rm -rf "$test_dir"
+}
+
+@test "create_project_with_boilerplate creates directory and files together" {
+    source script.sh
+
+    # Create project with boilerplate using generated name
+    run create_project_with_boilerplate
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should output the created directory name
+    [ -n "$output" ]
+
+    # Directory should exist
+    [ -d "$output" ]
+
+    # Standard files should exist
+    [ -f "$output/README.md" ]
+    [ -f "$output/TODO.md" ]
+    [ -f "$output/MEMORY.md" ]
+    [ -f "$output/AGENT.md" ]
+
+    # Clean up
+    rm -rf "$output"
+}
+
+@test "create_project_with_boilerplate works with specified directory name" {
+    source script.sh
+
+    # Create project with specific name
+    test_dir="specific-project-$$"
+    run create_project_with_boilerplate "$test_dir"
+
+    # Should return success
+    [ "$status" -eq 0 ]
+
+    # Should output the created directory name
+    [ "$output" = "$test_dir" ]
+
+    # Directory should exist
+    [ -d "$test_dir" ]
+
+    # Standard files should exist
+    [ -f "$test_dir/README.md" ]
+    [ -f "$test_dir/TODO.md" ]
+    [ -f "$test_dir/MEMORY.md" ]
+    [ -f "$test_dir/AGENT.md" ]
+
+    # Clean up
+    rm -rf "$test_dir"
+}
