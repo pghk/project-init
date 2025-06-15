@@ -424,3 +424,41 @@
     # The detailed path resolution is tested through the fallback system test above
     [ "$(type -t find_templates_directory)" = "function" ] || [ -f "project-init" ]
 }
+
+# Documentation and project structure validation
+
+@test "README documentation has proper structure and content for agentic coding projects" {
+    # Verify README.md exists and has content
+    [ -f "README.md" ]
+    [ -s "README.md" ]
+
+    # Verify first paragraph identifies tool as command line tool for agentic coding projects
+    head -5 "README.md" | grep -i "command line tool"
+    head -5 "README.md" | grep -i "agentic coding projects"
+
+    # Verify design requirements are prominently placed near the top
+    # Should appear before installation section
+    readme_content=$(cat "README.md")
+
+    # Find line numbers for key sections
+    design_line=$(echo "$readme_content" | grep -n "brief, memorable, unique" | head -1 | cut -d: -f1)
+    install_line=$(echo "$readme_content" | grep -n "## Installation" | head -1 | cut -d: -f1)
+
+    # Design requirements should come before installation
+    [ -n "$design_line" ]
+    [ -n "$install_line" ]
+    [ "$design_line" -lt "$install_line" ]
+
+    # Verify all key design requirements are documented
+    grep -q "brief, memorable, unique, and chronologically sortable" "README.md"
+    grep -q "auto-generated folder names and user-specified" "README.md"
+    grep -q "README.md with project overview" "README.md"
+    grep -q "TODO.md for task tracking" "README.md"
+    grep -q "MEMORY.md for maintaining project state" "README.md"
+    grep -q "AGENT.md with development rules" "README.md"
+    grep -q "git repository" "README.md"
+
+    # Verify installation and usage sections exist
+    grep -q "## Installation" "README.md"
+    grep -q "## Usage" "README.md"
+}

@@ -133,6 +133,14 @@ Update development guidelines when you learn:
 - Useful techniques or tools
 - Important considerations for future work
 
+### Documentation Structure Best Practices
+When writing or updating project documentation:
+- **Lead with project identity**: First paragraph should clearly state what the tool/project is and its primary purpose
+- **Front-load key features**: Place design requirements and core capabilities prominently near the top, before installation details
+- **Use progressive disclosure**: Structure information from most important (identity, purpose, key features) to implementation details (installation, configuration)
+- **Focus on user value**: Emphasize what the tool does for users rather than how it works internally
+- **Test documentation structure**: Include tests that verify documentation contains required sections and content in the correct order
+
 ### AGENT.md Synchronization
 When updating this project's AGENT.md file, consider whether changes should be reflected in the template:
 - **Core workflow changes** (steps 1-12, commit message format, project structure standards) should be synchronized to `templates/AGENT.md` while keeping it language-agnostic
