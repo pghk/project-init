@@ -9,7 +9,7 @@ For every task assigned, complete these steps in order:
 5. **Update TODO List** - Mark the task as completed
 6. **Update Memory File** - Record current project state and relevant notes
 7. **Fix Issues** - Address any warnings or errors in the code
-8. **Update Guidelines** - Revise development guidelines based on learnings
+8. **Update Guidelines & Sync Templates** - Revise development guidelines and synchronize improvements to templates
 9. **Commit Changes** - Use descriptive commit message (see implementation guide)
 10. **Stop** - End session to open new chat for next task
 
@@ -103,8 +103,9 @@ Execute your test suite to verify:
 - Ensure code quality standards are met
 - Validate functionality after fixes
 
-## 8. Updating Guidelines
+## 8. Updating Guidelines & Sync Templates
 
+### Update Development Guidelines
 Update development guidelines when you learn:
 - New best practices
 - Better implementation patterns
@@ -119,6 +120,13 @@ When writing or updating project documentation:
 - **Use progressive disclosure**: Structure information from most important (identity, purpose, key features) to implementation details (installation, configuration)
 - **Focus on user value**: Emphasize what the tool does for users rather than how it works internally
 - **Test documentation structure**: Include tests that verify documentation contains required sections and content in the correct order
+
+### Template Synchronization
+**Always check if guideline updates should be synchronized to templates:**
+- **Core workflow changes** (steps 1-12, commit message format, project structure standards) → Synchronize to templates while keeping language-agnostic
+- **Project-specific implementation details** → Keep only in project-specific guidelines
+- **Language-agnostic best practices** (like documentation structure above) → Synchronize to templates
+- Review templates after significant updates and commit template changes separately
 
 ## 9. Committing Changes
 

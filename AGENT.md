@@ -9,7 +9,7 @@ For every task assigned, complete these steps in order:
 5. **Update TODO List** - Mark the task as completed
 6. **Update Memory File** - Record current project state and relevant notes
 7. **Fix Issues** - Address any warnings or errors in the code
-8. **Update Guidelines** - Revise development guidelines based on learnings
+8. **Update Guidelines & Sync Templates** - Revise development guidelines and synchronize improvements to templates
 9. **Review TODO List** - Check project design requirements and add any missing tasks needed to fulfill them
 10. **Commit Changes** - Use descriptive commit message (see implementation guide)
 11. **Refactor Tests for Flexibility** - Review and refactor tests to focus on design requirements rather than implementation details, then commit any test changes
@@ -125,8 +125,9 @@ Always execute `bats test.sh` to verify:
 - Ensure code quality standards are met
 - Validate functionality after fixes
 
-## 8. Updating Guidelines
+## 8. Updating Guidelines & Sync Templates
 
+### Update Development Guidelines
 Update development guidelines when you learn:
 - New best practices
 - Better implementation patterns
@@ -141,11 +142,12 @@ When writing or updating project documentation:
 - **Focus on user value**: Emphasize what the tool does for users rather than how it works internally
 - **Test documentation structure**: Include tests that verify documentation contains required sections and content in the correct order
 
-### AGENT.md Synchronization
-When updating this project's AGENT.md file, consider whether changes should be reflected in the template:
-- **Core workflow changes** (steps 1-12, commit message format, project structure standards) should be synchronized to `templates/AGENT.md` while keeping it language-agnostic
-- **Project-specific implementation details** (bash scripting standards, bats testing framework, performance considerations) should remain only in the project AGENT.md
-- Review `templates/AGENT.md` after significant updates to ensure the template remains current with core workflow improvements while preserving its generic, language-agnostic nature
+### REQUIRED: AGENT.md Template Synchronization
+**Always check if guideline updates should be synchronized to the template:**
+- **Core workflow changes** (steps 1-12, commit message format, project structure standards) → Synchronize to `templates/AGENT.md` while keeping language-agnostic
+- **Project-specific implementation details** (bash scripting standards, bats testing framework, performance considerations) → Keep only in project AGENT.md
+- **Language-agnostic best practices** (like documentation structure above) → Synchronize to template
+- Review `templates/AGENT.md` after significant updates and commit template changes separately
 
 ## 9. Reviewing TODO List
 
