@@ -252,11 +252,11 @@
     [ "$status" -eq 0 ]
 
     # Output should include user-friendly messages and directory name
-    [[ "$output" =~ "Created project:" ]]
-    [[ "$output" =~ "Ready to start development!" ]]
+    [[ "$output" =~ "✅ Created project:" ]]
+    [[ "$output" =~ "Start developing your project!" ]]
 
     # Extract directory name from output
-    created_dir=$(echo "$output" | grep "Created project:" | sed 's/Created project: //')
+    created_dir=$(echo "$output" | grep "✅ Created project:" | sed 's/✅ Created project: //')
     [[ "$created_dir" =~ ^[0-9]{3}-[a-z-]+$ ]]
     [ -d "$created_dir" ]
     [ -d "$created_dir/.git" ]
@@ -276,8 +276,8 @@
     custom_dir="main-custom-$$"
     run ./project-init "$custom_dir"
     [ "$status" -eq 0 ]
-    [[ "$output" =~ "Created project: $custom_dir" ]]
-    [[ "$output" =~ "Ready to start development!" ]]
+    [[ "$output" =~ "✅ Created project: $custom_dir" ]]
+    [[ "$output" =~ "Start developing your project!" ]]
     [ -d "$custom_dir" ]
 
     # Test error handling for existing directory
