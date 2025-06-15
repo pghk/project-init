@@ -29,3 +29,4 @@
 - [x] Update installation instructions with correct GitHub repo and template requirements
 - [x] Consolidate installation methods and use symlinks for templates to enable easy updates
 - [x] Update README first paragraph to reflect project identity and move Design Requirements section to top
+- [x] Improve command-line output to be more user-friendly for one-off tool usage

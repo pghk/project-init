@@ -280,7 +280,8 @@ main() {
     local exit_code=$?
 
     if [ $exit_code -eq 0 ]; then
-        echo "$created_dir"
+        echo "Created project: $created_dir"
+        echo "Ready to start development!"
         exit 0
     else
         exit $exit_code

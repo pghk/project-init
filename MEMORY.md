@@ -85,9 +85,9 @@ This is a bash project initializer called `project-init` that creates new develo
 - Git functions handle existing repositories by adding new files and creating additional commits
 - Test suite designed to be flexible and focus on behavioral requirements rather than rigid implementation details
 - Command-line interface supports help flags (--help, -h, help) with comprehensive usage information
-- Main function provides clean, minimal output (just directory name on success) and proper exit codes
+- Main function provides user-friendly output with confirmation messages and proper exit codes
 - Error handling includes meaningful messages for common failure scenarios
-- Script creates projects silently with clean output when run without arguments
+- Script creates projects with clear feedback messages when run without arguments
 - Proper argument validation with usage display for invalid inputs
 - Script executable as standalone command-line tool without requiring bash invocation
 - Environment variable PROJECT_INIT_TEMPLATES allows custom template directory specification
@@ -120,8 +120,8 @@ All design requirements from README.md have been completely implemented:
 - All documentation and tests updated to reflect new script name
 - Help text updated to show proper usage with `project-init` command
 - Added dedicated test case for command-line tool functionality
-- Removed demonstration output from main function for cleaner, production-ready behavior
-- Updated tests to expect minimal output (just directory name on success)
+- Enhanced main function output to be more user-friendly for command-line tool usage with clear project creation confirmation
+- Updated tests to expect user-friendly output with confirmation messages
 
 Future enhancements could include:
 - Making the word selection algorithm configurable for different use cases
