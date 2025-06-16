@@ -1,10 +1,10 @@
 # Project Initializer
 
-This is a command line tool that makes it easy to quickly start new agentic coding projects. The `project-init` bash script creates properly structured development environments with boilerplate files and git initialization optimized for task-based, agent-driven development workflows.
+`project-init` names your new project so you don't have to.
 
 - Generates folder names that are brief, memorable, unique, and chronologically sortable (within a known 10-year span, and month-level granularity)
 - Supports both auto-generated folder names and user-specified directory names
-- Populates the folder with boilerplate files to facilitate task-based development process:
+- Populates the folder with boilerplate files to facilitate a task-based, agentic development process:
   - README.md with project overview
   - TODO.md for task tracking and completion status
   - MEMORY.md for maintaining project state between development sessions
@@ -28,7 +28,7 @@ This is a command line tool that makes it easy to quickly start new agentic codi
    ```bash
    # Option A: System-wide installation (recommended)
    sudo ln -s "$(pwd)/project-init" /usr/local/bin/project-init
-   
+
    # Option B: User installation
    mkdir -p ~/.local/bin
    ln -s "$(pwd)/project-init" ~/.local/bin/project-init
